@@ -10,5 +10,6 @@
     "main": "index",
 
     "shortcuts": true,
-    "optimize": true
+    "optimize": true,
+    "pack": true
 }
