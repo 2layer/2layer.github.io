@@ -1,0 +1,14 @@
+.menu {
+
+}
+
+.menu__item {
+    float: left;
+    padding: 0 15px;
+}
+
+@media screen and (max-width:540px) {
+    .menu__item {
+        padding: 0 10px;
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "name": "2layer",
+    "version": "1.0.0",
+    "description": "2 layer project",
+    "private": true,
+
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/2layer/2layer.git"
+    },
+
+    "dependencies": {
+        "grunt": "*"
+    },
+    "devDependencies": {
+        "grunt": "*",
+        "grunt-csso": "*",
+        "grunt-contrib-watch": "*",
+        "grunt-contrib-jshint": "*",
+        "grunt-lmd": "*",
+        "grunt-autoprefixer": "*"
+    },
+    "author": "Mikhail Davydov <i@azproduction.ru>",
+    "license": "MIT",
+    "readmeFilename": "README.md"
+}

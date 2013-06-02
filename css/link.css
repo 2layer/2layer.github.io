@@ -1,0 +1,17 @@
+.link {
+    text-decoration: none;
+    color: inherit;
+    transition: color .3s ease-in-out;
+
+    font-size: 14px;
+}
+
+.link:hover, .link:focus {
+    color: #0060a6;
+}
+
+@media screen and (max-width:540px) {
+    .link {
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,239 @@
+.grid_cols_12 {
+    padding-right: 57.47%;
+    position: relative;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.grid_cols_12:before, .grid_cols_12:after, .grid__row:before, .grid__row:after {
+    clear: both;
+    content: '';
+    display: block;
+}
+
+.grid__module_first_yes {
+    clear: left;
+}
+
+.grid__module {
+    float: left;
+    position: relative;
+}
+
+.grid__module_span_1 {
+    margin-right: -15%;
+    width: 15%;
+}
+
+.grid__module_col_1 {
+    left: 0%;
+}
+
+.grid__module_span_2 {
+    margin-right: -35%;
+    width: 35%;
+}
+
+.grid__module_col_2 {
+    left: 20%;
+}
+
+.grid__module_span_3 {
+    margin-right: -55%;
+    width: 55%;
+}
+
+.grid__module_col_3 {
+    left: 40%;
+}
+
+.grid__module_span_4 {
+    margin-right: -75%;
+    width: 75%;
+}
+
+.grid__module_col_4 {
+    left: 60%;
+}
+
+.grid__module_span_5 {
+    margin-right: -95%;
+    width: 95%;
+}
+
+.grid__module_col_5 {
+    left: 80%;
+}
+
+.grid__module_span_6 {
+    margin-right: -115%;
+    width: 115%;
+}
+
+.grid__module_col_6 {
+    left: 100%;
+}
+
+.grid__module_span_7 {
+    margin-right: -135%;
+    width: 135%;
+}
+
+.grid__module_col_7 {
+    left: 120%;
+}
+
+.grid__module_span_8 {
+    margin-right: -155%;
+    width: 155%;
+}
+
+.grid__module_col_8 {
+    left: 140%;
+}
+
+.grid__module_span_9 {
+    margin-right: -175%;
+    width: 175%;
+}
+
+.grid__module_col_9 {
+    left: 160%;
+}
+
+.grid__module_span_10 {
+    margin-right: -195%;
+    width: 195%;
+}
+
+.grid__module_col_10 {
+    left: 180%;
+}
+
+.grid__module_span_11 {
+    margin-right: -215%;
+    width: 215%;
+}
+
+.grid__module_col_11 {
+    left: 200%;
+}
+
+.grid__module_span_12 {
+    margin-right: -235%;
+    width: 235%;
+}
+
+.grid__module_col_12 {
+    left: 220%;
+}
+
+.grid__restore, .grid__initial {
+    position: relative;
+}
+
+.grid__restore .grid_cols_12 {
+    padding-right: 0;
+    margin-right: -400%;
+}
+
+.grid__restore .grid__initial {
+    margin-right: -1075%;
+}
+
+.grid__module_span_1 .grid__restore {
+    margin-right: -33.33%;
+}
+
+.grid__module_col_1 .grid__restore .grid_cols_12, .grid__module_col_1 .grid__restore .grid__initial {
+    left: 0%;
+}
+
+.grid__module_span_2 .grid__restore {
+    margin-right: 42.86%;
+}
+
+.grid__module_col_2 .grid__restore .grid_cols_12, .grid__module_col_2 .grid__restore .grid__initial {
+    left: -100%;
+}
+
+.grid__module_span_3 .grid__restore {
+    margin-right: 63.64%;
+}
+
+.grid__module_col_3 .grid__restore .grid_cols_12, .grid__module_col_3 .grid__restore .grid__initial {
+    left: -200%;
+}
+
+.grid__module_span_4 .grid__restore {
+    margin-right: 73.33%;
+}
+
+.grid__module_col_4 .grid__restore .grid_cols_12, .grid__module_col_4 .grid__restore .grid__initial {
+    left: -300%;
+}
+
+.grid__module_span_5 .grid__restore {
+    margin-right: 78.95%;
+}
+
+.grid__module_col_5 .grid__restore .grid_cols_12, .grid__module_col_5 .grid__restore .grid__initial {
+    left: -400%;
+}
+
+.grid__module_span_6 .grid__restore {
+    margin-right: 82.61%;
+}
+
+.grid__module_col_6 .grid__restore .grid_cols_12, .grid__module_col_6 .grid__restore .grid__initial {
+    left: -500%;
+}
+
+.grid__module_span_7 .grid__restore {
+    margin-right: 85.19%;
+}
+
+.grid__module_col_7 .grid__restore .grid_cols_12, .grid__module_col_7 .grid__restore .grid__initial {
+    left: -600%;
+}
+
+.grid__module_span_8 .grid__restore {
+    margin-right: 87.1%;
+}
+
+.grid__module_col_8 .grid__restore .grid_cols_12, .grid__module_col_8 .grid__restore .grid__initial {
+    left: -700%;
+}
+
+.grid__module_span_9 .grid__restore {
+    margin-right: 88.57%;
+}
+
+.grid__module_col_9 .grid__restore .grid_cols_12, .grid__module_col_9 .grid__restore .grid__initial {
+    left: -800%;
+}
+
+.grid__module_span_10 .grid__restore {
+    margin-right: 89.74%;
+}
+
+.grid__module_col_10 .grid__restore .grid_cols_12, .grid__module_col_10 .grid__restore .grid__initial {
+    left: -900%;
+}
+
+.grid__module_span_11 .grid__restore {
+    margin-right: 90.7%;
+}
+
+.grid__module_col_11 .grid__restore .grid_cols_12, .grid__module_col_11 .grid__restore .grid__initial {
+    left: -1000%;
+}
+
+.grid__module_span_12 .grid__restore {
+    margin-right: 91.49%;
+}
+
+.grid__module_col_12 .grid__restore .grid_cols_12, .grid__module_col_12 .grid__restore .grid__initial {
+    left: -1100%;
+}

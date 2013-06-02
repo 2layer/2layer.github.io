@@ -1,0 +1,40 @@
+.article {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    max-width: 960px;
+    margin: 0 auto;
+    height: 100%;
+    padding: 50px 50px 50px 75px;
+
+    font-size: 14px;
+    line-height: 170%;
+
+    overflow: auto;
+
+    background: #fff;
+}
+
+.article p {
+    margin-bottom: 1.5em;
+}
+
+.article p:last-child {
+    margin-bottom: 6em;
+}
+
+.article h2 {
+    font-size: 40px;
+    line-height: 1.5em;
+
+    margin-bottom: 1em;
+}
+
+@media screen and (max-width:540px) {
+    .article {
+        padding: 10px;
+    }
+
+    .article h2 {
+        font-size: 20px;
+    }
+}

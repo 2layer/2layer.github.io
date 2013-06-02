@@ -1,0 +1,14 @@
+{
+    "name": "index build",
+    "root": "../js",
+    "output": "../_index.js",
+    "modules": {
+        "ymaps": "@ymaps",
+        "*": "*.js",
+        "*View": "views/*.js"
+    },
+    "main": "index",
+
+    "shortcuts": true,
+    "optimize": true
+}
