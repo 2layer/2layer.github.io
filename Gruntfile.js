@@ -35,7 +35,7 @@ module.exports = function(grunt) {
                         '<%= grunt.template.today("yyyy-mm-dd") %> */\n'
                 },
                 files: {
-                    './_index.css': ['css/**/*.css']
+                    './index.css': ['css/**/*.css']
                 }
             }
         },

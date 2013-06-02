@@ -1,7 +1,7 @@
 {
     "name": "index build",
     "root": "../js",
-    "output": "../_index.js",
+    "output": "../index.js",
     "modules": {
         "ymaps": "@ymaps",
         "*": "*.js",
