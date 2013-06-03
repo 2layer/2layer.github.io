@@ -3,14 +3,9 @@
     "version": "1.0.0",
     "description": "2 layer project",
     "private": true,
-
     "repository": {
         "type": "git",
         "url": "git://github.com/2layer/2layer.github.io.git"
-    },
-
-    "dependencies": {
-        "grunt": "*"
     },
     "devDependencies": {
         "grunt": "*",

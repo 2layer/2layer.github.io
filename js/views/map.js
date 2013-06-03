@@ -2,7 +2,7 @@ var ymaps = require('ymaps'),
     character = require('characterView');
 
 var geolocation = ymaps.geolocation,
-    coords = [geolocation.latitude, geolocation.longitude];
+    coords = [geolocation.longitude, geolocation.latitude];
 
 /**
  *
