@@ -1,0 +1,48 @@
+.character {
+    background: url("/images/characters.png");
+    background-size: 288px 32px;
+    height: 32px;
+    width: 32px;
+    display: inline-block;
+}
+
+.character_margin_yes {
+    margin-right: 12px;
+    margin-bottom: -5px;
+}
+
+.character_id_0 {
+    background-position: 0 0;
+}
+
+.character_id_1 {
+    background-position: -32px 0;
+}
+
+.character_id_2 {
+    background-position: -64px 0;
+}
+
+.character_id_3 {
+    background-position: -96px 0;
+}
+
+.character_id_4 {
+    background-position: -128px 0;
+}
+
+.character_id_5 {
+    background-position: -160px 0;
+}
+
+.character_id_6 {
+    background-position: -192px 0;
+}
+
+.character_id_7 {
+    background-position: -224px 0;
+}
+
+.character_id_8 {
+    background-position: -256px 0;
+}

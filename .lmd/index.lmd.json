@@ -5,7 +5,9 @@
     "modules": {
         "ymaps": "@ymaps",
         "*": "*.js",
-        "*View": "views/*.js"
+        "*View": "views/*.js",
+        "moment": "vendors/moment.js",
+        "moment-ru": "vendors/moment-ru.js"
     },
     "main": "index",
 

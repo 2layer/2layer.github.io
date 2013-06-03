@@ -20,7 +20,7 @@ function map(el) {
 
     map.controls.add('zoomControl', {
         left: 5,
-        top: 5
+        top: 150
     });
 
     map.events.add('click', function (e) {

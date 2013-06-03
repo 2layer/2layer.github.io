@@ -9,31 +9,20 @@ var stateManager = require('stateManager');
 function content(el) {
     var $el = $(el);
 
-    var $body = $el.find('.body'),
-        $articles = $body.find('.article'),
-        $gallery = $body.find('.gallery'),
-        $logo = $el.find('.logo'),
-        $menuLinks = $el.find('.js-about-button,.js-photos-button');
+    var $pages = $el.find('.page'),
+        $pageLinks = $el.find('.js-about-button,.js-online-button');
 
-    $body.find('.body__content,.body__gallery').add($logo).click(function () {
-        stateManager.activate('map');
-    });
-
-    $articles.add($gallery).click(function () {
-        return false;
-    });
-
-    $menuLinks.click(function () {
+    $pageLinks.click(function () {
         var $link = $(this),
             target = $link.attr('href').replace('#', ''),
-            $currentArticle = $articles.filter('.js-' + target + '-article');
+            $currentPage = $pages.filter('.js-' + target + '-page');
 
-        if ($currentArticle.is(':visible')) {
+        if ($currentPage.is(':visible')) {
             stateManager.activate('map');
         } else {
-            stateManager.activate('content');
-            $articles.hide();
-            $currentArticle.show();
+            stateManager.activate('page');
+            $pages.addClass('hidden');
+            $currentPage.removeClass('hidden');
         }
 
         return false;

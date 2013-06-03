@@ -17,7 +17,7 @@ var sprite_size = config.sprite_size,
  */
 function character(options) {
     var spriteId = options.spriteId,
-        name = options.name || Math.random();
+        name = options.name || Math.random().toString(16);
 
     var placemark = new ymaps.Placemark(options.location, {
         hintContent: name
@@ -32,7 +32,8 @@ function character(options) {
         src: options.photoUrl || 'http://placehold.it/1280x1024',
         title: name,
         date: new Date(),
-        href: 'http://placehold.it/1280x1024'
+        href: 'http://placehold.it/1280x1024',
+        spriteId: spriteId
     });
 
     placemark.events.add('click', function () {

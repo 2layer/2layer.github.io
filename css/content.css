@@ -1,10 +1,26 @@
-html, body {
-    height: 100%;
-}
-
 .content {
     min-width: 360px;
     margin: 0 auto;
+
     font-family: 'Helvetica Neue', 'Arial', sans-serif;
     color: #222;
+}
+
+.content_state_page .map,
+.content_state_gallery .map {
+    -webkit-filter: blur(3px);
+       -moz-filter: blur(3px);
+            filter: blur(3px);
+}
+
+@media screen and (max-width:1200px) {
+    .content_state_page .menu,
+    .content_state_gallery .menu {
+        display: none;
+    }
+
+    .content_state_page .share_mode_fixed,
+    .content_state_gallery .share_mode_fixed {
+        display: none;
+    }
 }

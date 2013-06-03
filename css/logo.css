@@ -1,13 +1,20 @@
 .logo {
-    padding-left: 15px;
+    font-family: 'iflash-705', 'Terminal', monospace;
+    position: fixed;
+    left: 5px;
+    top: 5px;
+    background: #fff;
+    padding: 5px 15px 10px;
+    font-size: 14px;
 }
 
 .logo__image {
     width: 28px;
+    margin-bottom: -7px;
 }
 
 @media screen and (max-width:540px) {
     .logo {
-        padding-left: 5px;
+        padding: 0 5px;
     }
 }

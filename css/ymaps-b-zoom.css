@@ -1,0 +1,6 @@
+.ymaps-b-zoom .ymaps-b-zoom__scale-bg,
+.ymaps-b-zoom .ymaps-b-zoom__sprite,
+.ymaps-b-zoom .ymaps-b-zoom__button_type_plus,
+.ymaps-b-zoom .ymaps-b-zoom__button_type_minus {
+    background-image: url('/images/ymaps-b-zoom.png');
+}

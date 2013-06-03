@@ -1,4 +1,5 @@
-var stateManager = require('stateManager');
+var stateManager = require('stateManager'),
+    moment = require('moment-ru');
 
 /**
  *
@@ -10,8 +11,9 @@ function Gallery(el) {
 
     this.$el = $(el);
     this.$image = this.$el.find('.gallery__image');
-    this.$date = this.$el.find('.gallery__date');
+    this.$date = this.$el.find('.gallery__date-placeholder');
     this.$link = this.$el.find('.gallery__link');
+    this.$character = this.$el.find('.character');
 
     this.items = [];
     this.index = 0;
@@ -36,10 +38,16 @@ Gallery.prototype.add = function (options) {
 };
 
 Gallery.prototype._updateGallery = function (options) {
+    var date = moment.duration(moment(options.date).diff()).humanize();
+
     this.show();
     this.$image.attr('src', options.src);
-    this.$date.text(options.date);
+    this.$date.text(date);
     this.$link.text(options.title).attr('href', options.href);
+
+    this.$character
+        .removeClass()
+        .addClass('character character_margin_yes character_id_' + options.spriteId);
 };
 
 Gallery.prototype.go = function (index) {

@@ -1,0 +1,22 @@
+.button {
+    background: #fff;
+
+    border: solid 2px #222;
+    padding: 0 25px 4px;
+
+    font-family: 'iflash-705', 'Terminal', monospace;
+    font-size: 16px;
+
+    cursor: pointer;
+
+    box-shadow: 0 2px 0 0 #bbb;
+}
+
+.button:active {
+    margin-top: 2px;
+    box-shadow: none;
+}
+
+.button:hover {
+    color: #0060a6;
+}

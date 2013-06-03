@@ -1,0 +1,9 @@
+.layer {
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+}
+
+.layer_height_100 {
+    height: 100%;
+}

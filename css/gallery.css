@@ -3,17 +3,15 @@
     -moz-box-sizing: border-box;
     max-width: 960px;
     margin: 0 auto;
-    height: 100%;
-    padding: 50px 60px 70px 60px;
+    min-height: 100%;
+    padding: 50px 50px 50px 75px;
 
+    font-family: 'iflash-705', 'Terminal', monospace;
     font-size: 14px;
     line-height: 170%;
 
-    overflow: auto;
-
     background: #fff;
-
-    text-align: center;
+    position: relative;
 }
 
 .gallery__image {
@@ -24,8 +22,18 @@
 .gallery__date,
 .gallery__title {
     font-size: 14px;
-    color: #777;
     text-align: left;
+}
+
+.gallery__date {
+    margin-bottom: 2em;
+    color: #777;
+}
+
+.gallery__link {
+    font-size: 16px;
+    color: inherit;
+    line-height: 30px;
 }
 
 @media screen and (max-width:540px) {
