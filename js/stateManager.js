@@ -32,4 +32,10 @@ $contentLayers.find('>div').click(function () {
     return false;
 });
 
+$(window).keyup(function (e) {
+    if (e.which === 27) {
+        activate('map');
+    }
+});
+
 exports.activate = activate;
