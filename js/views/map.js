@@ -1,8 +1,6 @@
 var ymaps = require('ymaps'),
+    config = require('config'),
     character = require('characterView');
-
-var geolocation = ymaps.geolocation,
-    coords = [geolocation.longitude, geolocation.latitude];
 
 /**
  *
@@ -11,12 +9,7 @@ var geolocation = ymaps.geolocation,
  */
 function map(el) {
     el = $(el || '#map')[0];
-    var map = new ymaps.Map(el, {
-        center: coords,
-        zoom: 14,
-        type: 'yandex#satellite' || 'yandex#hybrid',
-        behaviors: ['default', 'scrollZoom']
-    });
+    var map = new ymaps.Map(el, config.map);
 
     map.events.add('click', function (e) {
         var coords = e.get('coordPosition');

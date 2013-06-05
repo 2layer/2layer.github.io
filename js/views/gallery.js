@@ -1,5 +1,6 @@
 var stateManager = require('stateManager'),
-    moment = require('moment-ru');
+    lang = require('lang');
+    moment = require(lang === 'ru' ? 'moment-ru' : 'moment');
 
 /**
  *

@@ -1,8 +1,14 @@
-var dfd = $.Deferred(),
-    dfd2 = $.Deferred(),
-    ymaps = window.ymaps;
+var lang = require('lang'),
+    config = require('config'),
+    ymapsApi = config.ymapsApi.replace('%lang', lang);
 
-ymaps.ready(dfd.resolve);
-$(dfd2.resolve);
+var maps = $.getScript(ymapsApi).pipe(function () {
+    var dfd = $.Deferred();
+    window.ymaps.ready(dfd.resolve);
+    return dfd.promise();
+});
 
-module.exports = $.when(dfd.promise(), dfd2.promise());
+var ready = $.Deferred();
+$(ready.resolve);
+
+module.exports = $.when(maps, ready.promise());
