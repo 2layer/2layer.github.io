@@ -3,15 +3,8 @@ var Backbone = require('backbone'),
     config = require('config'),
     moment = require(lang === 'ru' ? 'moment-ru' : 'moment');
 
-var Photo = Backbone.RelationalModel.extend({
-    defaults: {
-        small: '#',
-        original: '#'
-    }
-});
-
 var id = 0;
-var Character = Backbone.RelationalModel.extend({
+var Character = Backbone.Model.extend({
     defaults: function () {
         return {
             id: ++id,
@@ -21,11 +14,6 @@ var Character = Backbone.RelationalModel.extend({
             date: new Date()
         };
     },
-    relations: [{
-        type: Backbone.HasOne,
-        key: 'photo',
-        relatedModel: Photo
-    }],
 
     /**
      * @return {Boolean}

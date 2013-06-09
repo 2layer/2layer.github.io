@@ -1,6 +1,3 @@
-// init plugin
-require('backbone-relational');
-
 // localize app
 $('html').attr('lang', require('lang'));
 

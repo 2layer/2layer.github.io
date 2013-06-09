@@ -14,8 +14,7 @@
         "moment-ru": "vendors/moment-ru.js",
         "underscore": "vendors/underscore-min.js",
         "_": "@underscore",
-        "backbone": "vendors/backbone-min.js",
-        "backbone-relational": "vendors/backbone-relational-min.js"
+        "backbone": "vendors/backbone-min.js"
     },
     "main": "bootstrap",
 
