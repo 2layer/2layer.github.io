@@ -1,112 +1,94 @@
-var stateManager = require('stateManager'),
+var Backbone = require('backbone'),
+    stateManager = require('stateManager'),
     lang = require('lang');
-    moment = require(lang === 'ru' ? 'moment-ru' : 'moment');
 
-/**
- *
- * @param {String|jQuery|HTMLElement} el
- * @constructor
- */
-function Gallery(el) {
-    var self = this;
+var Gallery = Backbone.View.extend({
+    events: {
+        'click .gallery__image': 'changeImage'
+    },
 
-    this.$el = $(el);
-    this.$image = this.$el.find('.gallery__image');
-    this.$date = this.$el.find('.gallery__date-placeholder');
-    this.$link = this.$el.find('.gallery__link');
-    this.$character = this.$el.find('.character');
+    initialize: function () {
+        this.$image = this.$el.find('.gallery__image');
+        this.$date = this.$el.find('.gallery__date-placeholder');
+        this.$link = this.$el.find('.gallery__link');
+        this.$character = this.$el.find('.icon');
 
-    this.items = [];
-    this.index = 0;
+        this.index = this.collection.length - 1;
+    },
 
-    this.$image.click(function (e) {
-        var $image = $(this),
-            posX = $image.position().left,
-            percentage = (e.pageX - posX) / $image.width();
+    changeImage: function (e) {
+        var posX = this.$image.position().left,
+            percentage = (e.pageX - posX) / this.$image.width();
 
         if (percentage < 0.2) {
-            self.prev();
+            this.prev();
         } else {
-            self.next();
+            this.next();
         }
-    });
-}
+    },
 
-Gallery.prototype.add = function (options) {
-    this.items.push(options);
+    render: function (model) {
+        var attributes = model.attributes,
+            timeOnline = model.timeOnline(),
+            src = attributes.photo.small,
+            href = attributes.photo.original;
 
-    return this.items.length - 1;
-};
+        this.show();
+        this.$image.attr('src', src);
+        this.$date.text(timeOnline);
+        this.$link.text(attributes.name).attr('href', href);
 
-Gallery.prototype._updateGallery = function (options) {
-    var date = moment.duration(moment(options.date).diff()).humanize();
+        this.$character
+            .removeClass()
+            .addClass('icon icon_margin_yes icon_id_' + attributes.class_id);
 
-    this.show();
-    this.$image.attr('src', options.src);
-    this.$date.text(date);
-    this.$link.text(options.title).attr('href', options.href);
+        if (model.isNewbie()) {
+            this.$character.addClass('icon_newbie_yes');
+        }
+    },
 
-    this.$character
-        .removeClass()
-        .addClass('character character_margin_yes character_id_' + options.spriteId);
-};
+    go: function (index) {
+        if (this.collection.length <= index || index < 0) {
+            return;
+        }
 
-Gallery.prototype.go = function (index) {
-    if (this.items.length <= index || index < 0) {
-        return;
+        this.render(this.collection.at(index));
+    },
+
+    /**
+     * @param {Number} id character id
+     */
+    showById: function (id) {
+        var model = this.collection.get(id);
+        this.index = this.collection.indexOf(model);
+        this.go(this.index);
+    },
+
+    next: function () {
+        this.index++;
+        if (this.index > this.collection.length -1) {
+            this.index = 0;
+        }
+
+        this.go(this.index);
+    },
+
+    prev: function () {
+        this.index--;
+        if (this.index < 0) {
+            this.index = this.collection.length -1;
+        }
+
+        this.go(this.index);
+    },
+
+    show: function () {
+        stateManager.activate('gallery');
+    },
+
+    hide: function () {
+        stateManager.activate('map');
     }
+});
 
-    this._updateGallery(this.items[index]);
-};
-
-Gallery.prototype.next = function () {
-    this.index++;
-    if (this.index > this.items.length -1) {
-        this.index = 0;
-    }
-
-    this.go(this.index);
-};
-
-Gallery.prototype.prev = function () {
-    this.index--;
-    if (this.index < 0) {
-        this.index = this.items.length -1;
-    }
-
-    this.go(this.index);
-};
-
-Gallery.prototype.show = function () {
-    stateManager.activate('gallery');
-
-    return this;
-};
-
-Gallery.prototype.hide = function () {
-    stateManager.activate('map');
-
-    return this;
-};
-
-var instance;
-
-/**
- *
- * @param {String|jQuery|HTMLElement} el
- * @return {Gallery}
- */
-module.exports = function (el) {
-    if (instance) {
-        return instance;
-    }
-
-    if (!el) {
-        throw new Error('Activate gallery before use: require("gallery")(".gallery")');
-    }
-
-    instance = new Gallery(el);
-
-    return instance;
-};
-
+module.exports = Gallery;

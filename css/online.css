@@ -1,0 +1,35 @@
+.online {
+    font-family: 'iflash-705', 'Terminal', monospace;
+}
+
+.online__item {
+    float: left;
+    width: 50%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.online__date,
+.online__title {
+    font-size: 14px;
+    text-align: left;
+}
+
+.online__date {
+    margin-bottom: 2em;
+    color: #777;
+}
+
+.online__link {
+    font-size: 16px;
+    color: inherit;
+    line-height: 30px;
+    text-overflow: ellipsis;
+}
+
+@media screen and (max-width:540px) {
+    .online__item {
+        width: 100%;
+        float: none;
+    }
+}

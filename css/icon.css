@@ -1,4 +1,4 @@
-.character {
+.icon {
     background: url("/images/characters.png");
     background-size: 288px 32px;
     height: 32px;
@@ -6,43 +6,61 @@
     display: inline-block;
 }
 
-.character_margin_yes {
+.icon_margin_yes {
     margin-right: 12px;
     margin-bottom: -5px;
 }
 
-.character_id_0 {
+.icon_id_0 {
     background-position: 0 0;
 }
 
-.character_id_1 {
+.icon_id_1 {
     background-position: -32px 0;
 }
 
-.character_id_2 {
+.icon_id_2 {
     background-position: -64px 0;
 }
 
-.character_id_3 {
+.icon_id_3 {
     background-position: -96px 0;
 }
 
-.character_id_4 {
+.icon_id_4 {
     background-position: -128px 0;
 }
 
-.character_id_5 {
+.icon_id_5 {
     background-position: -160px 0;
 }
 
-.character_id_6 {
+.icon_id_6 {
     background-position: -192px 0;
 }
 
-.character_id_7 {
+.icon_id_7 {
     background-position: -224px 0;
 }
 
-.character_id_8 {
+.icon_id_8 {
     background-position: -256px 0;
+}
+
+.icon_newbie_yes:after {
+    display: block;
+    background: red;
+    border-radius: 5px;
+    height: 10px;
+    opacity: 0.8;
+
+    font-family: 'iflash-705','Terminal',monospace;
+    font-size: 8px;
+    line-height: 8px;
+    color: #FFFFFF;
+    content: 'new';
+
+    margin: -2px 0 0 3px;
+    padding: 0 3px 2px 5px;
+    position: absolute;
 }

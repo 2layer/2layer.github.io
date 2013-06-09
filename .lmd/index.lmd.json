@@ -1,17 +1,24 @@
 {
-    "name": "index build",
+    "name": "BUILD: main",
     "root": "../js",
     "output": "../index.js",
     "modules": {
         "ymaps": "@ymaps",
         "*": "*.js",
         "*View": "views/*.js",
-        "moment": "vendors/moment.js",
-        "moment-ru": "vendors/moment-ru.js"
+        "*Model": "models/*.js",
+        "*Collection": "collections/*.js",
+        "*Template": "templates/*.html",
+
+        "moment": "vendors/moment.min.js",
+        "moment-ru": "vendors/moment-ru.js",
+        "underscore": "vendors/underscore-min.js",
+        "_": "@underscore",
+        "backbone": "vendors/backbone-min.js",
+        "backbone-relational": "vendors/backbone-relational-min.js"
     },
-    "main": "index",
+    "main": "bootstrap",
 
     "shortcuts": true,
-    "optimize": true,
-    "pack": true
+    "optimize": true
 }

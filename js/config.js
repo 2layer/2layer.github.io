@@ -7,12 +7,21 @@ var config = {
 
     ymapsApi: '//api-maps.yandex.ru/2.0.30/?coordorder=longlat&load=package.standard&lang=%lang',
 
-    map: {
+    mapState: {
         center: [60.597223, 56.837992],
+        minZoom: 16,
+        maxZoom: 20,
         zoom: 15,
         type: 'yandex#satellite',
         behaviors: ['default', 'scrollZoom']
-    }
+    },
+
+    mapOptions: {
+        minZoom: 13,
+        maxZoom: 23
+    },
+
+    newbie_days: 7
 };
 
 module.exports = config;

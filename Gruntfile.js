@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 
         watch: {
             js: {
-                files: ['js/**/*.js'],
+                files: ['js/**/*.js', 'js/templates/*.html'],
                 tasks: ['js']
             },
 
@@ -41,19 +41,23 @@ module.exports = function(grunt) {
         },
 
         lmd: {
-            index: 'index'
+            index: 'index',
+            index_pack: 'index+pack'
         }
     });
 
-    // These plugins provide necessary tasks.
+    // These plugins provide necessary tasks
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-csso');
     grunt.loadNpmTasks('grunt-lmd');
 
-    // Default task.
-    grunt.registerTask('default', ['watch']);
+    // Default task
+    grunt.registerTask('default', ['js', 'css', 'watch']);
     grunt.registerTask('css', ['csso']);
-    grunt.registerTask('js', ['jshint', 'lmd']);
+    grunt.registerTask('js', ['jshint', 'lmd:index']);
+
+    // Release task
+    grunt.registerTask('release', ['jshint', 'lmd:index_pack', 'csso']);
 
 };
