@@ -1,8 +1,8 @@
-var Backbone = require('backbone'),
+var AbstractCollection = require('abstractCollection'),
     Monster = require('monsterModel');
 
-var Monsters = Backbone.Collection.extend({
-    url: '/data/monsters.json',
+var Monsters = AbstractCollection.extend({
+    url: '/data/monsters.geojson',
     model: Monster
 });
 

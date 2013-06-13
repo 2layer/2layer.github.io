@@ -1,0 +1,21 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [60.597223, 56.837992]
+            },
+            "properties": {
+                "name": "123",
+                "date": "Sun Jun 09 2013 17:25:08 GMT+0600 (YEKT)",
+                "class_id": 1,
+                "photo": {
+                    "original": "http://placehold.it/1280x1024",
+                    "small": "http://placehold.it/1280x1024"
+                }
+            }
+        }
+    ]
+}
