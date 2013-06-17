@@ -19,7 +19,7 @@ var Character = Backbone.Model.extend({
      * @return {Boolean}
      */
     isNewbie: function () {
-        return moment(this.get('date')).diff(new Date(), 'days') < config.newbie_days
+        return moment().diff(this.get('date'), 'days') < config.newbie_days
     },
 
     /**
