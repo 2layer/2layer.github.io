@@ -24,3 +24,13 @@
         display: none;
     }
 }
+
+@media screen and (max-width:540px) {
+    .content_state_page .map,
+    .content_state_gallery .map {
+        display: none;
+        -webkit-filter: none;
+           -moz-filter: none;
+                filter: none;
+    }
+}
