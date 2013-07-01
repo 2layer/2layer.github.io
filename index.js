@@ -16,8 +16,10 @@ var config = {
     character: {
         sprite_size: 64,
         sprite_scale: 0.5,
-        sprite_url: '/images/characters.png'
+        sprite_url: '/images/characters-2.png'
     },
+
+    charactersCount: 11,
 
     ymapsApi: '//api-maps.yandex.ru/2.0.30/?coordorder=longlat&load=package.standard&lang=%lang',
 
@@ -428,7 +430,7 @@ var Character = Backbone.Model.extend({
         return {
             id: ++id,
             name: Math.random().toString(16),
-            class_id: 0 | Math.random() * 9,
+            class_id: 0 | Math.random() * config.charactersCount,
             photo: {},
             date: new Date()
         };

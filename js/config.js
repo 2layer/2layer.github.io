@@ -2,8 +2,10 @@ var config = {
     character: {
         sprite_size: 64,
         sprite_scale: 0.5,
-        sprite_url: '/images/characters.png'
+        sprite_url: '/images/characters-2.png'
     },
+
+    charactersCount: 11,
 
     ymapsApi: '//api-maps.yandex.ru/2.0.30/?coordorder=longlat&load=package.standard&lang=%lang',
 

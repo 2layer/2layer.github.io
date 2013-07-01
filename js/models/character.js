@@ -9,7 +9,7 @@ var Character = Backbone.Model.extend({
         return {
             id: ++id,
             name: Math.random().toString(16),
-            class_id: 0 | Math.random() * 9,
+            class_id: 0 | Math.random() * config.charactersCount,
             photo: {},
             date: new Date()
         };
