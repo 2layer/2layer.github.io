@@ -1,5 +1,5 @@
 var Backbone = require('backbone'),
-    stateManager = require('stateManager'),
+    router = require('router'),
     lang = require('lang');
 
 var Gallery = Backbone.View.extend({
@@ -13,7 +13,29 @@ var Gallery = Backbone.View.extend({
         this.$link = this.$el.find('.gallery__link');
         this.$character = this.$el.find('.icon');
 
-        this.index = this.collection.length - 1;
+        this.index = 0;
+
+        this._bindEvents();
+    },
+
+    _bindEvents: function () {
+        router.on('route:showGallery', function go(index) {
+            if (!this.collection.length) {
+                return;
+            }
+            this.go(index - 1);
+        }, this);
+
+        // Случай если url - gallery, а данных еще нет
+        router.once('route:showGallery', function rememberThenGo(index) {
+            if (this.collection.length) {
+                return;
+            }
+
+            this.collection.once('sync', function () {
+                this.go(index - 1);
+            }, this);
+        }, this);
     },
 
     changeImage: function (e) {
@@ -33,7 +55,6 @@ var Gallery = Backbone.View.extend({
             src = attributes.photo.small,
             href = attributes.photo.original;
 
-        this.show();
         this.$image.attr('src', src);
         this.$date.text(timeOnline);
         this.$link.text(attributes.name).attr('href', href);
@@ -49,19 +70,27 @@ var Gallery = Backbone.View.extend({
 
     go: function (index) {
         if (this.collection.length <= index || index < 0) {
+            // Закрываем окно если нет объекта
+            router.navigate('', {trigger: true});
             return;
         }
 
+        this.index = index;
         this.render(this.collection.at(index));
+    },
+
+    _navigate: function (index) {
+        router.navigate('gallery/' + (index + 1), {trigger: true});
     },
 
     /**
      * @param {Number} id character id
      */
     showById: function (id) {
-        var model = this.collection.get(id);
-        this.index = this.collection.indexOf(model);
-        this.go(this.index);
+        var model = this.collection.get(id),
+            index = this.collection.indexOf(model);
+
+        this._navigate(index);
     },
 
     next: function () {
@@ -70,7 +99,7 @@ var Gallery = Backbone.View.extend({
             this.index = 0;
         }
 
-        this.go(this.index);
+        this._navigate(this.index);
     },
 
     prev: function () {
@@ -79,15 +108,7 @@ var Gallery = Backbone.View.extend({
             this.index = this.collection.length -1;
         }
 
-        this.go(this.index);
-    },
-
-    show: function () {
-        stateManager.activate('gallery');
-    },
-
-    hide: function () {
-        stateManager.activate('map');
+        this._navigate(this.index);
     }
 });
 

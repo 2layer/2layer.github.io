@@ -1,6 +1,7 @@
 var ymaps = require('ymaps'),
     config = require('config'),
-    Backbone = require('backbone');
+    Backbone = require('backbone'),
+    router = require('router');
 
 var sprite_size = config.character.sprite_size,
     sprite_scale = config.character.sprite_scale,
@@ -38,8 +39,7 @@ var Map = Backbone.View.extend({
     },
 
     _addCharacter: function (options) {
-        var self = this,
-            class_id = options.class_id,
+        var class_id = options.class_id,
             name = options.name;
 
         var placemark = new ymaps.Placemark(options.location, {
@@ -53,7 +53,7 @@ var Map = Backbone.View.extend({
 
         placemark.events.add('click', function () {
             placemark.hint.hide($.noop, true);
-            self.trigger('characterClick', options.id);
+            router.navigate('gallery/' + options.id, {trigger: true});
         });
 
         this.map.geoObjects.add(placemark);

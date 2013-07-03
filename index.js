@@ -45,7 +45,8 @@ module.exports = config;
 }),
 "index": (function (require, exports, module) { /* wrapped by builder */
 var characters = new (require('charactersCollection'))(),
-    monsters = new (require('monstersCollection'))();
+    monsters = new (require('monstersCollection'))(),
+    Backbone = require('backbone');
 
 var Gallery = require('galleryView');
 var gallery = new Gallery({
@@ -59,27 +60,19 @@ var map = new Map({
     collection: characters,
     monsters: monsters
 });
-map.on('characterClick', function (id) {
-    gallery.showById(id);
-});
 
 var Online = require('onlineView');
 var online = new Online({
     el: '.online',
     collection: characters
 });
-online.on('characterClick', function (id) {
-    gallery.showById(id);
-});
-
-var Content = require('contentView');
-var content = new Content({
-    el: 'body'
-});
 
 monsters.fetch();
 characters.fetch();
 
+// Запускаем в самом конце,
+// чтобы объекты успели подписаться на события роутера
+Backbone.history.start();
 
 }),
 "lang": (function (require, exports, module) { /* wrapped by builder */
@@ -110,86 +103,93 @@ $(ready.resolve);
 module.exports = $.when(maps, ready.promise());
 
 }),
-"stateManager": (function (require, exports, module) { /* wrapped by builder */
-var $body = $('.content'),
-    $galleryLayers = $body.find('.js-gallery-layer'),
-    $pageLayer = $body.find('.js-page-layer'),
-    $contentLayers = $galleryLayers.add($pageLayer),
-    $okButtons = $body.find('.button_ok');
+"router": (function (require, exports, module) { /* wrapped by builder */
+var Backbone = require('backbone');
 
 var AVAILABLE_STATES = ['content_state_map', 'content_state_page', 'content_state_gallery'].join(' ');
 
-function activate(what) {
-    $body.removeClass(AVAILABLE_STATES).addClass('content_state_' + what);
-
-    switch (what) {
-        case 'map':
-            $contentLayers.addClass('hidden');
-            break;
-        case 'page':
-            $galleryLayers.addClass('hidden');
-            $pageLayer.removeClass('hidden');
-            break;
-        default:
-            $galleryLayers.removeClass('hidden');
-            $pageLayer.addClass('hidden');
-            break;
-    }
-}
-
-$contentLayers.add($okButtons).click(function () {
-    activate('map');
-});
-
-$contentLayers.find('>div').click(function () {
-    return false;
-});
-
-$(window).keyup(function (e) {
-    if (e.which === 27) {
-        activate('map');
-    }
-});
-
-exports.activate = activate;
-
-}),
-"contentView": (function (require, exports, module) { /* wrapped by builder */
-var Backbone = require('backbone'),
-    stateManager = require('stateManager');
-
-var Content = Backbone.View.extend({
-    events: {
-        'click .js-about-button,.js-online-button': 'showContent'
+var Router = Backbone.Router.extend({
+    routes: {
+        '': 'hideAll',
+        'gallery/:id': 'showGallery',
+        ':page': 'showPage'
     },
 
     initialize: function () {
-        this.$pages = this.$el.find('.page');
+        this.$body = $('.content');
+        this.$galleryLayers = this.$body.find('.js-gallery-layer');
+        this.$pageLayer = this.$body.find('.js-page-layer');
+        this.$contentLayers = this.$galleryLayers.add(this.$pageLayer);
+        this.$pages = this.$body.find('.page');
+
+        this._bindDefaultEvents();
     },
 
-    showContent: function (e) {
-        var $link = $(e.target),
-            target = $link.attr('href').replace('#', ''),
-            $currentPage = this.$pages.filter('.js-' + target + '-page');
+    _bindDefaultEvents: function () {
+        var self = this;
+
+        this.$contentLayers.click(function () {
+            self.navigate('', {trigger: true});
+        });
+
+        this.$contentLayers.find('>div').click(function (e) {
+            return $(e.target).is('button,a');
+        });
+
+
+        $(window).keyup(function (e) {
+            if (e.which === 27) {
+                self.navigate('', {trigger: true});
+            }
+        });
+    },
+
+    showPage: function (page) {
+        var $currentPage = this.$pages.filter('.js-' + page + '-page');
 
         if ($currentPage.is(':visible')) {
-            stateManager.activate('map');
+            this._activate('map');
         } else {
-            stateManager.activate('page');
+            this._activate('page');
             this.$pages.addClass('hidden');
             $currentPage.removeClass('hidden');
         }
+    },
 
-        return false;
+    showGallery: function () {
+        this._activate('gallery');
+    },
+
+    hideAll: function () {
+        this._activate('map');
+    },
+
+    _activate: function (what) {
+        this.$body.removeClass(AVAILABLE_STATES).addClass('content_state_' + what);
+
+        switch (what) {
+            case 'page':
+                this.$galleryLayers.addClass('hidden');
+                this.$pageLayer.removeClass('hidden');
+                break;
+            case 'gallery':
+                this.$galleryLayers.removeClass('hidden');
+                this.$pageLayer.addClass('hidden');
+                break;
+            case 'map':
+            default:
+                this.$contentLayers.addClass('hidden');
+                break;
+        }
     }
 });
 
-module.exports = Content;
+module.exports = new Router();
 
 }),
 "galleryView": (function (require, exports, module) { /* wrapped by builder */
 var Backbone = require('backbone'),
-    stateManager = require('stateManager'),
+    router = require('router'),
     lang = require('lang');
 
 var Gallery = Backbone.View.extend({
@@ -203,7 +203,29 @@ var Gallery = Backbone.View.extend({
         this.$link = this.$el.find('.gallery__link');
         this.$character = this.$el.find('.icon');
 
-        this.index = this.collection.length - 1;
+        this.index = 0;
+
+        this._bindEvents();
+    },
+
+    _bindEvents: function () {
+        router.on('route:showGallery', function go(index) {
+            if (!this.collection.length) {
+                return;
+            }
+            this.go(index - 1);
+        }, this);
+
+        // Случай если url - gallery, а данных еще нет
+        router.once('route:showGallery', function rememberThenGo(index) {
+            if (this.collection.length) {
+                return;
+            }
+
+            this.collection.once('sync', function () {
+                this.go(index - 1);
+            }, this);
+        }, this);
     },
 
     changeImage: function (e) {
@@ -223,7 +245,6 @@ var Gallery = Backbone.View.extend({
             src = attributes.photo.small,
             href = attributes.photo.original;
 
-        this.show();
         this.$image.attr('src', src);
         this.$date.text(timeOnline);
         this.$link.text(attributes.name).attr('href', href);
@@ -239,19 +260,27 @@ var Gallery = Backbone.View.extend({
 
     go: function (index) {
         if (this.collection.length <= index || index < 0) {
+            // Закрываем окно если нет объекта
+            router.navigate('', {trigger: true});
             return;
         }
 
+        this.index = index;
         this.render(this.collection.at(index));
+    },
+
+    _navigate: function (index) {
+        router.navigate('gallery/' + (index + 1), {trigger: true});
     },
 
     /**
      * @param {Number} id character id
      */
     showById: function (id) {
-        var model = this.collection.get(id);
-        this.index = this.collection.indexOf(model);
-        this.go(this.index);
+        var model = this.collection.get(id),
+            index = this.collection.indexOf(model);
+
+        this._navigate(index);
     },
 
     next: function () {
@@ -260,7 +289,7 @@ var Gallery = Backbone.View.extend({
             this.index = 0;
         }
 
-        this.go(this.index);
+        this._navigate(this.index);
     },
 
     prev: function () {
@@ -269,15 +298,7 @@ var Gallery = Backbone.View.extend({
             this.index = this.collection.length -1;
         }
 
-        this.go(this.index);
-    },
-
-    show: function () {
-        stateManager.activate('gallery');
-    },
-
-    hide: function () {
-        stateManager.activate('map');
+        this._navigate(this.index);
     }
 });
 
@@ -287,7 +308,8 @@ module.exports = Gallery;
 "mapView": (function (require, exports, module) { /* wrapped by builder */
 var ymaps = require('ymaps'),
     config = require('config'),
-    Backbone = require('backbone');
+    Backbone = require('backbone'),
+    router = require('router');
 
 var sprite_size = config.character.sprite_size,
     sprite_scale = config.character.sprite_scale,
@@ -325,8 +347,7 @@ var Map = Backbone.View.extend({
     },
 
     _addCharacter: function (options) {
-        var self = this,
-            class_id = options.class_id,
+        var class_id = options.class_id,
             name = options.name;
 
         var placemark = new ymaps.Placemark(options.location, {
@@ -340,7 +361,7 @@ var Map = Backbone.View.extend({
 
         placemark.events.add('click', function () {
             placemark.hint.hide($.noop, true);
-            self.trigger('characterClick', options.id);
+            router.navigate('gallery/' + options.id, {trigger: true});
         });
 
         this.map.geoObjects.add(placemark);
@@ -368,10 +389,6 @@ var _ = require('_'),
     Backbone = require('backbone');
 
 var Online = Backbone.View.extend({
-    events: {
-        'click .online__item': 'characterClick'
-    },
-
     template: _.template(require('online__itemTemplate')),
 
     initialize: function () {
@@ -406,12 +423,6 @@ var Online = Backbone.View.extend({
 
     render: function (model) {
         this.$el.append(this._renderModel(model));
-    },
-
-    characterClick: function (e) {
-        this.trigger('characterClick', e.currentTarget.id);
-
-        return false;
     }
 });
 
@@ -545,7 +556,7 @@ module.exports = Monsters;
 
 
 }),
-"online__itemTemplate": "<li class=\"online__item\" id=\"<%= id %>\">\n    <div>\n        <span class=\"icon icon_margin_yes icon_id_<%= class_id %><% if (is_newbie) { %> icon_newbie_yes<% } %>\"></span><a class=\"online__link\" target=\"_blank\" href=\"<%= photo.original %>\"><%= name %></a>\n    </div>\n    <div class=\"online__date\"><%= date_calendar %></div>\n</li>",
+"online__itemTemplate": "<li class=\"online__item\" id=\"<%= id %>\">\n    <div>\n        <span class=\"icon icon_margin_yes icon_id_<%= class_id %><% if (is_newbie) { %> icon_newbie_yes<% } %>\"></span><a class=\"online__link\" href=\"#gallery/<%= id %>\"><%= name %></a>\n    </div>\n    <div class=\"online__date\"><%= date_calendar %></div>\n</li>",
 "moment": (function (require, exports, module) { /* wrapped by builder */
 // moment.js
 // version : 2.0.0

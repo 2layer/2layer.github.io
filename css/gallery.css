@@ -17,6 +17,8 @@
 .gallery__image {
     max-height: 100%;
     max-width: 100%;
+
+    cursor: pointer;
 }
 
 .gallery__date,

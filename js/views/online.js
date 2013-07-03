@@ -4,10 +4,6 @@ var _ = require('_'),
     Backbone = require('backbone');
 
 var Online = Backbone.View.extend({
-    events: {
-        'click .online__item': 'characterClick'
-    },
-
     template: _.template(require('online__itemTemplate')),
 
     initialize: function () {
@@ -42,12 +38,6 @@ var Online = Backbone.View.extend({
 
     render: function (model) {
         this.$el.append(this._renderModel(model));
-    },
-
-    characterClick: function (e) {
-        this.trigger('characterClick', e.currentTarget.id);
-
-        return false;
     }
 });
 
