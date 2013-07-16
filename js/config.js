@@ -2,7 +2,8 @@ var config = {
     character: {
         sprite_size: 64,
         sprite_scale: 0.5,
-        sprite_url: '/images/characters-2.png'
+        sprite_url: '/images/characters-2.png',
+        default_photo: 'http://placehold.it/1280x1024'
     },
 
     charactersCount: 11,

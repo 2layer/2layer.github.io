@@ -22,14 +22,15 @@ var Router = Backbone.Router.extend({
     _bindDefaultEvents: function () {
         var self = this;
 
-        this.$contentLayers.click(function () {
-            self.navigate('', {trigger: true});
+        this.$contentLayers.click(function (e) {
+            if ($(e.target).is(self.$contentLayers)) {
+                self.navigate('', {trigger: true});
+            }
         });
 
         this.$contentLayers.find('>div').click(function (e) {
             return $(e.target).is('button,a');
         });
-
 
         $(window).keyup(function (e) {
             if (e.which === 27) {

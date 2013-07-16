@@ -16,7 +16,8 @@ var config = {
     character: {
         sprite_size: 64,
         sprite_scale: 0.5,
-        sprite_url: '/images/characters-2.png'
+        sprite_url: '/images/characters-2.png',
+        default_photo: 'http://placehold.it/1280x1024'
     },
 
     charactersCount: 11,
@@ -50,7 +51,7 @@ var characters = new (require('charactersCollection'))(),
 
 var Gallery = require('galleryView');
 var gallery = new Gallery({
-    el: '.gallery',
+    el: '.js-gallery-layer',
     collection: characters
 });
 
@@ -128,14 +129,15 @@ var Router = Backbone.Router.extend({
     _bindDefaultEvents: function () {
         var self = this;
 
-        this.$contentLayers.click(function () {
-            self.navigate('', {trigger: true});
+        this.$contentLayers.click(function (e) {
+            if ($(e.target).is(self.$contentLayers)) {
+                self.navigate('', {trigger: true});
+            }
         });
 
         this.$contentLayers.find('>div').click(function (e) {
             return $(e.target).is('button,a');
         });
-
 
         $(window).keyup(function (e) {
             if (e.which === 27) {
@@ -188,21 +190,19 @@ module.exports = new Router();
 
 }),
 "galleryView": (function (require, exports, module) { /* wrapped by builder */
-var Backbone = require('backbone'),
+var _ = require('_'),
+    Backbone = require('backbone'),
     router = require('router'),
     lang = require('lang');
 
 var Gallery = Backbone.View.extend({
+    template: _.template(require('galleryTemplate')),
+
     events: {
         'click .gallery__image': 'changeImage'
     },
 
     initialize: function () {
-        this.$image = this.$el.find('.gallery__image');
-        this.$date = this.$el.find('.gallery__date-placeholder');
-        this.$link = this.$el.find('.gallery__link');
-        this.$character = this.$el.find('.icon');
-
         this.index = 0;
 
         this._bindEvents();
@@ -229,8 +229,9 @@ var Gallery = Backbone.View.extend({
     },
 
     changeImage: function (e) {
-        var posX = this.$image.position().left,
-            percentage = (e.pageX - posX) / this.$image.width();
+        var $image = $(e.target),
+            posX = $image.position().left,
+            percentage = (e.pageX - posX) / $image.width();
 
         if (percentage < 0.2) {
             this.prev();
@@ -240,22 +241,43 @@ var Gallery = Backbone.View.extend({
     },
 
     render: function (model) {
-        var attributes = model.attributes,
-            timeOnline = model.timeOnline(),
-            src = attributes.photo.small,
-            href = attributes.photo.original;
+        var attributes = model.attributes;
 
-        this.$image.attr('src', src);
-        this.$date.text(timeOnline);
-        this.$link.text(attributes.name).attr('href', href);
+        var options = {
+            src: attributes.photo.small,
+            classId: attributes.class_id,
+            name: attributes.name,
+            href: attributes.photo.original,
+            isNewbie: model.isNewbie(),
+            timeOnline: model.timeOnline()
+        };
 
-        this.$character
-            .removeClass()
-            .addClass('icon icon_margin_yes icon_id_' + attributes.class_id);
+        this.$el.html(this.template(options));
+        this._initShareButton(options);
+    },
 
-        if (model.isNewbie()) {
-            this.$character.addClass('icon_newbie_yes');
+    _initShareButton: function (data) {
+        if (!window.Ya || !Ya.share) {
+            return;
         }
+
+        this.$el.find('.share__buttons').each(function () {
+            var $el = $(this);
+            Ya.share({
+                element: $el[0],
+                theme: $el.attr('data-yashareTheme'),
+                l10n: $el.attr('data-yashareL10n'),
+                image: $el.attr('data-yashareImage'),
+                link: $el.attr('data-yashareLink'),
+                title: $el.attr('data-yashareTitle'),
+                description: $el.attr('data-yashareDescription'),
+                elementStyle: {
+                    type: $el.attr('data-yashareType'),
+                    quickServices: $el.attr('data-yashareQuickServices').split(',')
+                }
+            });
+        });
+        return false;
     },
 
     go: function (index) {
@@ -442,7 +464,10 @@ var Character = Backbone.Model.extend({
             id: ++id,
             name: Math.random().toString(16),
             class_id: 0 | Math.random() * config.charactersCount,
-            photo: {},
+            photo: {
+                small: config.character.default_photo,
+                original: config.character.default_photo
+            },
             date: new Date()
         };
     },
@@ -556,6 +581,7 @@ module.exports = Monsters;
 
 
 }),
+"galleryTemplate": "<div class=\"gallery\">\n    <img src=\"<%= src %>\" class=\"gallery__image\">\n    <div class=\"share share_mode_float\">\n        <div class=\"yashare-auto-init share__buttons\"\n             data-yashareTitle=\"2nd Layer - фото проект\"\n             data-yashareDescription=\"Lorem ipsum dolor sit amet, consectetur adipiscing elit\"\n             data-yashareImage=\"<%= src %>\"\n             data-yashareL10n=\"ru\"\n             data-yashareType=\"link\"\n             data-yashareQuickServices=\"vkontakte,facebook,twitter,odnoklassniki,moimir,gplus,pinterest\"\n             lang=\"ru\"></div>\n        <div class=\"yashare-auto-init share__buttons\"\n             data-yashareTitle=\"2nd Layer - photo project\"\n             data-yashareDescription=\"Lorem ipsum dolor sit amet, consectetur adipiscing elit\"\n             data-yashareImage=\"<%= src %>\"\n             data-yashareL10n=\"en\"\n             data-yashareType=\"link\"\n             data-yashareQuickServices=\"facebook,twitter,gplus,pinterest\"\n             lang=\"en\"></div>\n    </div>\n    <div class=\"gallery__title\">\n        <span class=\"icon icon_margin_yes icon_id_<%= classId %><% if (isNewbie) { %> icon_newbie_yes<% } %>\"></span><a class=\"gallery__link\" href=\"<%= href %>\" target=\"_blank\"><%= name %></a>\n    </div>\n    <div class=\"gallery__date\" lang=\"ru\">Уже <%= timeOnline %> онлайн!</div>\n    <div class=\"gallery__date\" lang=\"en\"><%= timeOnline %> online!</div>\n\n    <div class=\"button-panel\">\n        <a href=\"#\"><button class=\"button button_ok\">OK</button></a>\n    </div>\n</div>",
 "online__itemTemplate": "<li class=\"online__item\" id=\"<%= id %>\">\n    <div>\n        <span class=\"icon icon_margin_yes icon_id_<%= class_id %><% if (is_newbie) { %> icon_newbie_yes<% } %>\"></span><a class=\"online__link\" href=\"#gallery/<%= id %>\"><%= name %></a>\n    </div>\n    <div class=\"online__date\"><%= date_calendar %></div>\n</li>",
 "moment": (function (require, exports, module) { /* wrapped by builder */
 // moment.js

@@ -16,3 +16,22 @@
     text-align: center;
     padding: 70px 0 10px 0;
 }
+
+.share_mode_float {
+    float: right;
+}
+
+.share .b-share__text {
+    font-family: 'iflash-705', 'Terminal', monospace;
+}
+
+body .b-share-popup__item {
+    font-family: 'iflash-705', 'Terminal', monospace;
+    font-size: 12px;
+}
+
+@media screen and (max-width:540px) {
+    .share .b-share__handle .b-share__text {
+        display: none;
+    }
+}

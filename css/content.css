@@ -13,6 +13,10 @@
             filter: blur(3px);
 }
 
+.content_state_gallery .layer_type_share {
+    display: none;
+}
+
 @media screen and (max-width:1200px) {
     .content_state_page .menu,
     .content_state_gallery .menu {

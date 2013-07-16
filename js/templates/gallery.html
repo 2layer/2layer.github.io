@@ -1,0 +1,30 @@
+<div class="gallery">
+    <img src="<%= src %>" class="gallery__image">
+    <div class="share share_mode_float">
+        <div class="yashare-auto-init share__buttons"
+             data-yashareTitle="2nd Layer - фото проект"
+             data-yashareDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+             data-yashareImage="<%= src %>"
+             data-yashareL10n="ru"
+             data-yashareType="link"
+             data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir,gplus,pinterest"
+             lang="ru"></div>
+        <div class="yashare-auto-init share__buttons"
+             data-yashareTitle="2nd Layer - photo project"
+             data-yashareDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+             data-yashareImage="<%= src %>"
+             data-yashareL10n="en"
+             data-yashareType="link"
+             data-yashareQuickServices="facebook,twitter,gplus,pinterest"
+             lang="en"></div>
+    </div>
+    <div class="gallery__title">
+        <span class="icon icon_margin_yes icon_id_<%= classId %><% if (isNewbie) { %> icon_newbie_yes<% } %>"></span><a class="gallery__link" href="<%= href %>" target="_blank"><%= name %></a>
+    </div>
+    <div class="gallery__date" lang="ru">Уже <%= timeOnline %> онлайн!</div>
+    <div class="gallery__date" lang="en"><%= timeOnline %> online!</div>
+
+    <div class="button-panel">
+        <a href="#"><button class="button button_ok">OK</button></a>
+    </div>
+</div>

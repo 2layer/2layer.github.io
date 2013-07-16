@@ -1,18 +1,16 @@
-var Backbone = require('backbone'),
+var _ = require('_'),
+    Backbone = require('backbone'),
     router = require('router'),
     lang = require('lang');
 
 var Gallery = Backbone.View.extend({
+    template: _.template(require('galleryTemplate')),
+
     events: {
         'click .gallery__image': 'changeImage'
     },
 
     initialize: function () {
-        this.$image = this.$el.find('.gallery__image');
-        this.$date = this.$el.find('.gallery__date-placeholder');
-        this.$link = this.$el.find('.gallery__link');
-        this.$character = this.$el.find('.icon');
-
         this.index = 0;
 
         this._bindEvents();
@@ -39,8 +37,9 @@ var Gallery = Backbone.View.extend({
     },
 
     changeImage: function (e) {
-        var posX = this.$image.position().left,
-            percentage = (e.pageX - posX) / this.$image.width();
+        var $image = $(e.target),
+            posX = $image.position().left,
+            percentage = (e.pageX - posX) / $image.width();
 
         if (percentage < 0.2) {
             this.prev();
@@ -50,22 +49,43 @@ var Gallery = Backbone.View.extend({
     },
 
     render: function (model) {
-        var attributes = model.attributes,
-            timeOnline = model.timeOnline(),
-            src = attributes.photo.small,
-            href = attributes.photo.original;
+        var attributes = model.attributes;
 
-        this.$image.attr('src', src);
-        this.$date.text(timeOnline);
-        this.$link.text(attributes.name).attr('href', href);
+        var options = {
+            src: attributes.photo.small,
+            classId: attributes.class_id,
+            name: attributes.name,
+            href: attributes.photo.original,
+            isNewbie: model.isNewbie(),
+            timeOnline: model.timeOnline()
+        };
 
-        this.$character
-            .removeClass()
-            .addClass('icon icon_margin_yes icon_id_' + attributes.class_id);
+        this.$el.html(this.template(options));
+        this._initShareButton(options);
+    },
 
-        if (model.isNewbie()) {
-            this.$character.addClass('icon_newbie_yes');
+    _initShareButton: function (data) {
+        if (!window.Ya || !Ya.share) {
+            return;
         }
+
+        this.$el.find('.share__buttons').each(function () {
+            var $el = $(this);
+            Ya.share({
+                element: $el[0],
+                theme: $el.attr('data-yashareTheme'),
+                l10n: $el.attr('data-yashareL10n'),
+                image: $el.attr('data-yashareImage'),
+                link: $el.attr('data-yashareLink'),
+                title: $el.attr('data-yashareTitle'),
+                description: $el.attr('data-yashareDescription'),
+                elementStyle: {
+                    type: $el.attr('data-yashareType'),
+                    quickServices: $el.attr('data-yashareQuickServices').split(',')
+                }
+            });
+        });
+        return false;
     },
 
     go: function (index) {

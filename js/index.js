@@ -4,7 +4,7 @@ var characters = new (require('charactersCollection'))(),
 
 var Gallery = require('galleryView');
 var gallery = new Gallery({
-    el: '.gallery',
+    el: '.js-gallery-layer',
     collection: characters
 });
 
