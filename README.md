@@ -1,4 +1,3 @@
-2layer
-======
+# 2Layer
 
-2nd layer project
+http://2layer.ru/#about

@@ -28,6 +28,14 @@
     margin-bottom: 1em;
 }
 
+.page .minor {
+    color: #666;
+}
+
+.page .minor a {
+    color: #333;
+}
+
 @media screen and (max-width:540px) {
     .page {
         padding: 10px;

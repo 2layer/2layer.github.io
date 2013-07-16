@@ -14,6 +14,19 @@
     position: relative;
 }
 
+.gallery__licence {
+    margin: 0 0 10px 10px;
+}
+
+.gallery__licence a {
+    color: #999;
+    font-size: 13px;
+}
+
+.gallery__licence a:hover {
+    color: blue;
+}
+
 .gallery__image {
     max-height: 100%;
     max-width: 100%;
