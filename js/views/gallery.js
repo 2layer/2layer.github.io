@@ -52,10 +52,10 @@ var Gallery = Backbone.View.extend({
         var attributes = model.attributes;
 
         var options = {
-            src: attributes.photo.small,
+            src: attributes.photo_small,
             classId: attributes.class_id,
             name: attributes.name,
-            href: attributes.photo.original,
+            href: attributes.photo_url,
             isNewbie: model.isNewbie(),
             timeOnline: model.timeOnline()
         };

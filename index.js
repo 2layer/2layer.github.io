@@ -244,10 +244,10 @@ var Gallery = Backbone.View.extend({
         var attributes = model.attributes;
 
         var options = {
-            src: attributes.photo.small,
+            src: attributes.photo_small,
             classId: attributes.class_id,
             name: attributes.name,
-            href: attributes.photo.original,
+            href: attributes.photo_url,
             isNewbie: model.isNewbie(),
             timeOnline: model.timeOnline()
         };
@@ -464,10 +464,8 @@ var Character = Backbone.Model.extend({
             id: ++id,
             name: Math.random().toString(16),
             class_id: 0 | Math.random() * config.charactersCount,
-            photo: {
-                small: config.character.default_photo,
-                original: config.character.default_photo
-            },
+            photo_small: config.character.default_photo,
+            photo_url: config.character.default_photo,
             date: new Date()
         };
     },

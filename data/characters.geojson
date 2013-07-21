@@ -11,10 +11,8 @@
                 "name": "123",
                 "date": "Sun Jun 09 2013 17:25:08 GMT+0600 (YEKT)",
                 "class_id": 1,
-                "photo": {
-                    "original": "http://placehold.it/1280x1024",
-                    "small": "http://placehold.it/1280x1024"
-                }
+                "photo_small": "http://placehold.it/1280x1024",
+                "photo_url": "http://placehold.it/1280x1024"
             }
         }
     ]
