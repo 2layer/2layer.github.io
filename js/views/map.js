@@ -5,6 +5,7 @@
 var ymaps = require('ymaps'),
     config = require('config'),
     Backbone = require('backbone'),
+    _ = require('_'),
     router = require('router');
 
 var sprite_size = config.character.sprite_size,
@@ -22,18 +23,18 @@ var Map = Backbone.View.extend(/** @lends module:mapView~Map# */{
      * @param {Backbone.Collection} options.monsters
      */
     initialize: function (options) {
-        var self = this;
-
         this.monsters = options.monsters;
         this.map = new ymaps.Map(this.el, config.mapState, config.mapOptions);
 
-        this.map.events.add('click', function (e) {
-            self.collection.add({
-                location: e.get('coordPosition')
-            });
-        });
-
+        this._createGeoObjectsCollections();
         this._addEvents();
+    },
+
+    _createGeoObjectsCollections: function () {
+        _.each(['monstersGeoObjects', 'charactersGeoObjects'], function (collectionName) {
+            this[collectionName] = new ymaps.GeoObjectCollection();
+            this.map.geoObjects.add(this[collectionName]);
+        }, this);
     },
 
     _addEvents: function () {
@@ -44,6 +45,12 @@ var Map = Backbone.View.extend(/** @lends module:mapView~Map# */{
         this.monsters.on('add', function (model) {
             this._addMonster(model.toJSON());
         }, this);
+
+//        this.map.events.add('click', function (e) {
+//            self.collection.add({
+//                location: e.get('coordPosition')
+//            });
+//        });
     },
 
     _addCharacter: function (options) {
@@ -64,7 +71,7 @@ var Map = Backbone.View.extend(/** @lends module:mapView~Map# */{
             router.navigate('gallery/' + options.id, {trigger: true});
         });
 
-        this.map.geoObjects.add(placemark);
+        this.charactersGeoObjects.add(placemark);
     },
 
     _addMonster: function (options) {
@@ -75,7 +82,7 @@ var Map = Backbone.View.extend(/** @lends module:mapView~Map# */{
             iconImageOffset: [-image.width * image.scale / 2, -image.height * image.scale]
         });
 
-        this.map.geoObjects.add(placemark);
+        this.monstersGeoObjects.add(placemark);
     }
 });
 

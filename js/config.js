@@ -19,10 +19,8 @@ var config = {
     ymapsApi: '//api-maps.yandex.ru/2.0.30/?coordorder=longlat&load=package.standard&lang=%lang',
 
     mapState: {
-        center: [60.597223, 56.837992],
-        minZoom: 16,
-        maxZoom: 20,
-        zoom: 15,
+        center: [60.650875169164664, 56.84878426050872],
+        zoom: 16,
         type: 'yandex#satellite',
         behaviors: ['default', 'scrollZoom']
     },

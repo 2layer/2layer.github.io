@@ -12,6 +12,14 @@ require('ready').pipe(function () {
 }),{
 "ymaps": "@ymaps",
 "config": (function (require, exports, module) { /* wrapped by builder */
+/**
+ * @module config
+ */
+
+/**
+ * @namespace
+ * @type {Object}
+ */
 var config = {
     character: {
         sprite_size: 64,
@@ -25,10 +33,8 @@ var config = {
     ymapsApi: '//api-maps.yandex.ru/2.0.30/?coordorder=longlat&load=package.standard&lang=%lang',
 
     mapState: {
-        center: [60.597223, 56.837992],
-        minZoom: 16,
-        maxZoom: 20,
-        zoom: 15,
+        center: [60.650875169164664, 56.84878426050872],
+        zoom: 16,
         type: 'yandex#satellite',
         behaviors: ['default', 'scrollZoom']
     },
@@ -45,6 +51,10 @@ module.exports = config;
 
 }),
 "index": (function (require, exports, module) { /* wrapped by builder */
+/**
+ * @module index
+ */
+
 var characters = new (require('charactersCollection'))(),
     monsters = new (require('monstersCollection'))(),
     Backbone = require('backbone');
@@ -77,6 +87,10 @@ Backbone.history.start();
 
 }),
 "lang": (function (require, exports, module) { /* wrapped by builder */
+/**
+ * @module lang
+ */
+
 var availableLanguages = ['en', 'ru'],
     lang = ((navigator.language || navigator.browserLanguage || '').match(/^[a-z]{2}/) || 0)[0];
 
@@ -88,6 +102,10 @@ module.exports = lang;
 
 }),
 "ready": (function (require, exports, module) { /* wrapped by builder */
+/**
+ * @module ready
+ */
+
 var lang = require('lang'),
     config = require('config'),
     ymapsApi = config.ymapsApi.replace('%lang', lang);
@@ -105,11 +123,19 @@ module.exports = $.when(maps, ready.promise());
 
 }),
 "router": (function (require, exports, module) { /* wrapped by builder */
+/**
+ * @module router
+ */
+
 var Backbone = require('backbone');
 
 var AVAILABLE_STATES = ['content_state_map', 'content_state_page', 'content_state_gallery'].join(' ');
 
-var Router = Backbone.Router.extend({
+/**
+ * @class
+ * @extends Backbone.Router
+ */
+var Router = Backbone.Router.extend(/** @lends module:router~Router# */{
     routes: {
         '': 'hideAll',
         'gallery/:id': 'showGallery',
@@ -146,6 +172,10 @@ var Router = Backbone.Router.extend({
         });
     },
 
+    /**
+     * Navigates to specified page
+     * @param {String} page
+     */
     showPage: function (page) {
         var $currentPage = this.$pages.filter('.js-' + page + '-page');
 
@@ -158,10 +188,16 @@ var Router = Backbone.Router.extend({
         }
     },
 
+    /**
+     * Opens gallery layer
+     */
     showGallery: function () {
         this._activate('gallery');
     },
 
+    /**
+     * Hides all layers
+     */
     hideAll: function () {
         this._activate('map');
     },
@@ -190,12 +226,23 @@ module.exports = new Router();
 
 }),
 "galleryView": (function (require, exports, module) { /* wrapped by builder */
+/**
+ * @module galleyView
+ */
+
 var _ = require('_'),
     Backbone = require('backbone'),
     router = require('router'),
     lang = require('lang');
 
-var Gallery = Backbone.View.extend({
+/**
+ * @class
+ * @extends Backbone.View
+ */
+var Gallery = Backbone.View.extend(/** @lends module:galleyView~Gallery# */{
+    /**
+     * @type {Function}
+     */
     template: _.template(require('galleryTemplate')),
 
     events: {
@@ -228,6 +275,9 @@ var Gallery = Backbone.View.extend({
         }, this);
     },
 
+    /**
+     * @param {Event} e
+     */
     changeImage: function (e) {
         var $image = $(e.target),
             posX = $image.position().left,
@@ -240,6 +290,9 @@ var Gallery = Backbone.View.extend({
         }
     },
 
+    /**
+     * @param {Character} model
+     */
     render: function (model) {
         var attributes = model.attributes;
 
@@ -280,6 +333,10 @@ var Gallery = Backbone.View.extend({
         return false;
     },
 
+    /**
+     * Navigate to character index
+     * @param {Number} index
+     */
     go: function (index) {
         if (this.collection.length <= index || index < 0) {
             // Закрываем окно если нет объекта
@@ -305,6 +362,9 @@ var Gallery = Backbone.View.extend({
         this._navigate(index);
     },
 
+    /**
+     * Next character
+     */
     next: function () {
         this.index++;
         if (this.index > this.collection.length -1) {
@@ -314,6 +374,9 @@ var Gallery = Backbone.View.extend({
         this._navigate(this.index);
     },
 
+    /**
+     * Prev character
+     */
     prev: function () {
         this.index--;
         if (this.index < 0) {
@@ -328,34 +391,43 @@ module.exports = Gallery;
 
 }),
 "mapView": (function (require, exports, module) { /* wrapped by builder */
+/**
+ * @module mapView
+ */
+
 var ymaps = require('ymaps'),
     config = require('config'),
     Backbone = require('backbone'),
+    _ = require('_'),
     router = require('router');
 
 var sprite_size = config.character.sprite_size,
     sprite_scale = config.character.sprite_scale,
     sprite_url = config.character.sprite_url;
 
-var Map = Backbone.View.extend({
+/**
+ * @class
+ * @extends Backbone.View
+ */
+var Map = Backbone.View.extend(/** @lends module:mapView~Map# */{
     /**
      *
      * @param {Object}              options
      * @param {Backbone.Collection} options.monsters
      */
     initialize: function (options) {
-        var self = this;
-
         this.monsters = options.monsters;
         this.map = new ymaps.Map(this.el, config.mapState, config.mapOptions);
 
-        this.map.events.add('click', function (e) {
-            self.collection.add({
-                location: e.get('coordPosition')
-            });
-        });
-
+        this._createGeoObjectsCollections();
         this._addEvents();
+    },
+
+    _createGeoObjectsCollections: function () {
+        _.each(['monstersGeoObjects', 'charactersGeoObjects'], function (collectionName) {
+            this[collectionName] = new ymaps.GeoObjectCollection();
+            this.map.geoObjects.add(this[collectionName]);
+        }, this);
     },
 
     _addEvents: function () {
@@ -366,6 +438,12 @@ var Map = Backbone.View.extend({
         this.monsters.on('add', function (model) {
             this._addMonster(model.toJSON());
         }, this);
+
+//        this.map.events.add('click', function (e) {
+//            self.collection.add({
+//                location: e.get('coordPosition')
+//            });
+//        });
     },
 
     _addCharacter: function (options) {
@@ -386,7 +464,7 @@ var Map = Backbone.View.extend({
             router.navigate('gallery/' + options.id, {trigger: true});
         });
 
-        this.map.geoObjects.add(placemark);
+        this.charactersGeoObjects.add(placemark);
     },
 
     _addMonster: function (options) {
@@ -397,7 +475,7 @@ var Map = Backbone.View.extend({
             iconImageOffset: [-image.width * image.scale / 2, -image.height * image.scale]
         });
 
-        this.map.geoObjects.add(placemark);
+        this.monstersGeoObjects.add(placemark);
     }
 });
 
@@ -405,12 +483,23 @@ module.exports = Map;
 
 }),
 "onlineView": (function (require, exports, module) { /* wrapped by builder */
+/**
+ * @module onlineView
+ */
+
 var _ = require('_'),
     lang = require('lang'),
     config = require('config'),
     Backbone = require('backbone');
 
-var Online = Backbone.View.extend({
+/**
+ * @class
+ * @extends Backbone.View
+ */
+var Online = Backbone.View.extend(/** @lends module:onlineView~Online# */{
+    /**
+     * @type {Function}
+     */
     template: _.template(require('online__itemTemplate')),
 
     initialize: function () {
@@ -424,6 +513,9 @@ var Online = Backbone.View.extend({
         }, this);
     },
 
+    /**
+     * Renders all online characters
+     */
     renderAll: function () {
         var html = this.collection.map(function (model) {
             return this._renderModel(model);
@@ -443,6 +535,9 @@ var Online = Backbone.View.extend({
         return this.template(options);
     },
 
+    /**
+     * @param {Character} model
+     */
     render: function (model) {
         this.$el.append(this._renderModel(model));
     }
@@ -452,13 +547,25 @@ module.exports = Online;
 
 }),
 "characterModel": (function (require, exports, module) { /* wrapped by builder */
+/**
+ * @module characterModel
+ */
+
 var Backbone = require('backbone'),
     lang = require('lang'),
     config = require('config'),
     moment = require(lang === 'ru' ? 'moment-ru' : 'moment');
 
 var id = 0;
-var Character = Backbone.Model.extend({
+
+/**
+ * @class
+ * @extends Backbone.Model
+ */
+var Character = Backbone.Model.extend(/** @lends module:characterModel~Character# */{
+    /**
+     * @return {Object}
+     */
     defaults: function () {
         return {
             id: ++id,
@@ -497,11 +604,23 @@ module.exports = Character;
 
 }),
 "monsterModel": (function (require, exports, module) { /* wrapped by builder */
+/**
+ * @module monsterModel
+ */
+
 var Backbone = require('backbone'),
     config = require('config');
 
 var id = 0;
-var Monster = Backbone.Model.extend({
+
+/**
+ * @class
+ * @extends Backbone.Model
+ */
+var Monster = Backbone.Model.extend(/** @lends module:monsterModel~Monster# */{
+    /**
+     * @return {Object}
+     */
     defaults: function () {
         return {
             id: ++id,
@@ -515,11 +634,25 @@ module.exports = Monster;
 
 }),
 "abstractCollection": (function (require, exports, module) { /* wrapped by builder */
+/**
+ * @module abstractCollection
+ */
+
 var Backbone = require('backbone'),
     _ = require('_');
 
-var AbstractCollection = Backbone.Collection.extend({
-    // Parse GeoJSON format
+/**
+ * @class
+ * @extends Backbone.Collection
+ */
+var AbstractCollection = Backbone.Collection.extend(/** @lends module:abstractCollection~AbstractCollection# */{
+    /**
+     * Parses GeoJSON format
+     *
+     * @see http://www.geojson.org/
+     * @param {Object} data
+     * @return {Object} internal object format
+     */
     parse: function (data) {
         return _.map(data.features, function (feature) {
             return _.extend(feature.properties, {
@@ -528,7 +661,12 @@ var AbstractCollection = Backbone.Collection.extend({
         });
     },
 
-    // Restore GeoJSON format
+    /**
+     * Restore GeoJSON format
+     *
+     * @see http://www.geojson.org/
+     * @return {Object}
+     */
     toJSON: function () {
         var features = this.map(function (model) {
             var data = model.toJSON();
@@ -540,7 +678,7 @@ var AbstractCollection = Backbone.Collection.extend({
                     "coordinates": data.location
                 },
                 "properties": _.omit(data, 'location')
-        };
+            };
         });
 
         return {
@@ -554,11 +692,25 @@ module.exports = AbstractCollection;
 
 }),
 "charactersCollection": (function (require, exports, module) { /* wrapped by builder */
+/**
+ * @module charactersCollection
+ */
+
 var AbstractCollection = require('abstractCollection'),
     Character = require('characterModel');
 
-var Characters = AbstractCollection.extend({
+/**
+ * @class
+ * @extends AbstractCollection
+ */
+var Characters = AbstractCollection.extend(/** @lends module:charactersCollection~Characters# */{
+    /**
+     * @type {String}
+     */
     url: '/data/characters.geojson',
+    /**
+     * @type {Character}
+     */
     model: Character
 });
 
@@ -567,11 +719,25 @@ module.exports = Characters;
 
 }),
 "monstersCollection": (function (require, exports, module) { /* wrapped by builder */
+/**
+ * @module monstersCollection
+ */
+
 var AbstractCollection = require('abstractCollection'),
     Monster = require('monsterModel');
 
-var Monsters = AbstractCollection.extend({
+/**
+ * @class
+ * @extends AbstractCollection
+ */
+var Monsters = AbstractCollection.extend(/** @lends module:monstersCollection~Monsters# */{
+    /**
+     * @type {String}
+     */
     url: '/data/monsters.geojson',
+    /**
+     * @type {Monster}
+     */
     model: Monster
 });
 

@@ -5,12 +5,12 @@
             "type": "Feature",
             "geometry": {
                 "type": "Point",
-                "coordinates": [60.597223, 56.837992]
+                "coordinates": [60.650875169164664, 56.84878426050872]
             },
             "properties": {
-                "name": "123",
-                "date": "Sun Jun 09 2013 17:25:08 GMT+0600 (YEKT)",
-                "class_id": 1,
+                "name": "Lenus",
+                "date": "Sun Jul 21 2013 13:20:46 GMT+0600 (YEKT)",
+                "class_id": 10,
                 "photo_small": "http://placehold.it/1280x1024",
                 "photo_url": "http://placehold.it/1280x1024"
             }
