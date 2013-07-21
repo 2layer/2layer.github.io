@@ -1,3 +1,7 @@
+/**
+ * @module mapView
+ */
+
 var ymaps = require('ymaps'),
     config = require('config'),
     Backbone = require('backbone'),
@@ -7,7 +11,11 @@ var sprite_size = config.character.sprite_size,
     sprite_scale = config.character.sprite_scale,
     sprite_url = config.character.sprite_url;
 
-var Map = Backbone.View.extend({
+/**
+ * @class
+ * @extends Backbone.View
+ */
+var Map = Backbone.View.extend(/** @lends module:mapView~Map# */{
     /**
      *
      * @param {Object}              options

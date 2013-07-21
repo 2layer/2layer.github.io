@@ -13,7 +13,7 @@
         "grunt-contrib-watch": "*",
         "grunt-contrib-jshint": "*",
         "grunt-lmd": "*",
-        "grunt-autoprefixer": "*"
+        "grunt-jsdoc": "*"
     },
     "author": "Mikhail Davydov <i@azproduction.ru>",
     "license": "MIT",

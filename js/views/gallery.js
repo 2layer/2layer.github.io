@@ -1,9 +1,20 @@
+/**
+ * @module galleyView
+ */
+
 var _ = require('_'),
     Backbone = require('backbone'),
     router = require('router'),
     lang = require('lang');
 
-var Gallery = Backbone.View.extend({
+/**
+ * @class
+ * @extends Backbone.View
+ */
+var Gallery = Backbone.View.extend(/** @lends module:galleyView~Gallery# */{
+    /**
+     * @type {Function}
+     */
     template: _.template(require('galleryTemplate')),
 
     events: {
@@ -36,6 +47,9 @@ var Gallery = Backbone.View.extend({
         }, this);
     },
 
+    /**
+     * @param {Event} e
+     */
     changeImage: function (e) {
         var $image = $(e.target),
             posX = $image.position().left,
@@ -48,6 +62,9 @@ var Gallery = Backbone.View.extend({
         }
     },
 
+    /**
+     * @param {Character} model
+     */
     render: function (model) {
         var attributes = model.attributes;
 
@@ -88,6 +105,10 @@ var Gallery = Backbone.View.extend({
         return false;
     },
 
+    /**
+     * Navigate to character index
+     * @param {Number} index
+     */
     go: function (index) {
         if (this.collection.length <= index || index < 0) {
             // Закрываем окно если нет объекта
@@ -113,6 +134,9 @@ var Gallery = Backbone.View.extend({
         this._navigate(index);
     },
 
+    /**
+     * Next character
+     */
     next: function () {
         this.index++;
         if (this.index > this.collection.length -1) {
@@ -122,6 +146,9 @@ var Gallery = Backbone.View.extend({
         this._navigate(this.index);
     },
 
+    /**
+     * Prev character
+     */
     prev: function () {
         this.index--;
         if (this.index < 0) {

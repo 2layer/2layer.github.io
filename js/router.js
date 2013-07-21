@@ -1,8 +1,16 @@
+/**
+ * @module router
+ */
+
 var Backbone = require('backbone');
 
 var AVAILABLE_STATES = ['content_state_map', 'content_state_page', 'content_state_gallery'].join(' ');
 
-var Router = Backbone.Router.extend({
+/**
+ * @class
+ * @extends Backbone.Router
+ */
+var Router = Backbone.Router.extend(/** @lends module:router~Router# */{
     routes: {
         '': 'hideAll',
         'gallery/:id': 'showGallery',
@@ -39,6 +47,10 @@ var Router = Backbone.Router.extend({
         });
     },
 
+    /**
+     * Navigates to specified page
+     * @param {String} page
+     */
     showPage: function (page) {
         var $currentPage = this.$pages.filter('.js-' + page + '-page');
 
@@ -51,10 +63,16 @@ var Router = Backbone.Router.extend({
         }
     },
 
+    /**
+     * Opens gallery layer
+     */
     showGallery: function () {
         this._activate('gallery');
     },
 
+    /**
+     * Hides all layers
+     */
     hideAll: function () {
         this._activate('map');
     },

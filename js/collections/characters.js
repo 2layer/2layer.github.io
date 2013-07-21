@@ -1,8 +1,22 @@
+/**
+ * @module charactersCollection
+ */
+
 var AbstractCollection = require('abstractCollection'),
     Character = require('characterModel');
 
-var Characters = AbstractCollection.extend({
+/**
+ * @class
+ * @extends AbstractCollection
+ */
+var Characters = AbstractCollection.extend(/** @lends module:charactersCollection~Characters# */{
+    /**
+     * @type {String}
+     */
     url: '/data/characters.geojson',
+    /**
+     * @type {Character}
+     */
     model: Character
 });
 

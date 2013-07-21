@@ -1,3 +1,7 @@
+/**
+ * @module ready
+ */
+
 var lang = require('lang'),
     config = require('config'),
     ymapsApi = config.ymapsApi.replace('%lang', lang);

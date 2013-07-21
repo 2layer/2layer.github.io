@@ -1,10 +1,22 @@
+/**
+ * @module characterModel
+ */
+
 var Backbone = require('backbone'),
     lang = require('lang'),
     config = require('config'),
     moment = require(lang === 'ru' ? 'moment-ru' : 'moment');
 
 var id = 0;
-var Character = Backbone.Model.extend({
+
+/**
+ * @class
+ * @extends Backbone.Model
+ */
+var Character = Backbone.Model.extend(/** @lends module:characterModel~Character# */{
+    /**
+     * @return {Object}
+     */
     defaults: function () {
         return {
             id: ++id,

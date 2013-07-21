@@ -1,3 +1,11 @@
+/**
+ * @module config
+ */
+
+/**
+ * @namespace
+ * @type {Object}
+ */
 var config = {
     character: {
         sprite_size: 64,

@@ -1,9 +1,20 @@
+/**
+ * @module onlineView
+ */
+
 var _ = require('_'),
     lang = require('lang'),
     config = require('config'),
     Backbone = require('backbone');
 
-var Online = Backbone.View.extend({
+/**
+ * @class
+ * @extends Backbone.View
+ */
+var Online = Backbone.View.extend(/** @lends module:onlineView~Online# */{
+    /**
+     * @type {Function}
+     */
     template: _.template(require('online__itemTemplate')),
 
     initialize: function () {
@@ -17,6 +28,9 @@ var Online = Backbone.View.extend({
         }, this);
     },
 
+    /**
+     * Renders all online characters
+     */
     renderAll: function () {
         var html = this.collection.map(function (model) {
             return this._renderModel(model);
@@ -36,6 +50,9 @@ var Online = Backbone.View.extend({
         return this.template(options);
     },
 
+    /**
+     * @param {Character} model
+     */
     render: function (model) {
         this.$el.append(this._renderModel(model));
     }

@@ -1,3 +1,7 @@
+/**
+ * @module index
+ */
+
 var characters = new (require('charactersCollection'))(),
     monsters = new (require('monstersCollection'))(),
     Backbone = require('backbone');

@@ -40,6 +40,15 @@ module.exports = function(grunt) {
             }
         },
 
+        jsdoc : {
+            dist : {
+                src: ['js/**/*.js'],
+                options: {
+                    destination: 'doc'
+                }
+            }
+        },
+
         lmd: {
             index: 'index',
             index_pack: 'index+pack'
@@ -51,6 +60,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-csso');
     grunt.loadNpmTasks('grunt-lmd');
+    grunt.loadNpmTasks('grunt-jsdoc');
 
     // Default task
     grunt.registerTask('default', ['js', 'css', 'watch']);

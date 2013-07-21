@@ -1,3 +1,7 @@
+/**
+ * @module lang
+ */
+
 var availableLanguages = ['en', 'ru'],
     lang = ((navigator.language || navigator.browserLanguage || '').match(/^[a-z]{2}/) || 0)[0];
 
