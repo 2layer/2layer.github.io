@@ -13,7 +13,7 @@ var Monsters = AbstractCollection.extend(/** @lends module:monstersCollection~Mo
     /**
      * @type {String}
      */
-    url: '/data/monsters.geojson',
+    url: 'data/monsters.geojson',
     /**
      * @type {Monster}
      */

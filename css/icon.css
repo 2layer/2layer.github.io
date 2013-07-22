@@ -1,5 +1,5 @@
 .icon {
-    background: url("/images/characters-2.png");
+    background: url('images/characters-2.png');
     background-size: auto 32px;
     height: 32px;
     width: 32px;

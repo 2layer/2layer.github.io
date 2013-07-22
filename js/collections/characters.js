@@ -13,7 +13,7 @@ var Characters = AbstractCollection.extend(/** @lends module:charactersCollectio
     /**
      * @type {String}
      */
-    url: '/data/characters.geojson',
+    url: 'data/characters.geojson',
     /**
      * @type {Character}
      */

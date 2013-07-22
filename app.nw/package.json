@@ -1,0 +1,32 @@
+{
+    "name": "2layer-admin",
+    "version": "1.0.0",
+    "description": "2Layer Project admin version",
+    "private": true,
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/2layer/2layer.github.io.git"
+    },
+    "devDependencies": {
+        "grunt": "*",
+        "grunt-csso": "*",
+        "grunt-contrib-watch": "*",
+        "grunt-contrib-jshint": "*",
+        "grunt-lmd": "*",
+        "grunt-jsdoc": "*"
+    },
+    "author": "Mikhail Davydov <i@azproduction.ru>",
+    "license": "MIT",
+    "main": "index.html",
+    "window": {
+        "toolbar": false,
+        "resizable": true,
+        "fullscreen": false,
+
+        "width": 1024,
+        "height": 768,
+
+        "min_width": 380,
+        "min_height": 280
+    }
+}

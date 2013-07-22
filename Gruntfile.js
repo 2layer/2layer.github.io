@@ -11,13 +11,13 @@ module.exports = function(grunt) {
                 options: {
                     jshintrc: '.jshintrc'
                 },
-                src: ['js/**/*.js', 'Gruntfile.js']
+                src: ['js/**/*.js', 'js.admin/**/*.js', 'Gruntfile.js']
             }
         },
 
         watch: {
             js: {
-                files: ['js/**/*.js', 'js/templates/*.html'],
+                files: ['js/**/*.js', 'js.admin/**/*.js', 'js/templates/*.html'],
                 tasks: ['js']
             },
 
@@ -42,7 +42,7 @@ module.exports = function(grunt) {
 
         jsdoc : {
             dist : {
-                src: ['js/**/*.js'],
+                src: ['js/**/*.js', 'js.admin/**/*.js'],
                 options: {
                     destination: 'doc'
                 }
@@ -51,7 +51,8 @@ module.exports = function(grunt) {
 
         lmd: {
             index: 'index',
-            index_pack: 'index+pack'
+            index_pack: 'index+pack',
+            admin: 'admin'
         }
     });
 
@@ -65,7 +66,7 @@ module.exports = function(grunt) {
     // Default task
     grunt.registerTask('default', ['js', 'css', 'watch']);
     grunt.registerTask('css', ['csso']);
-    grunt.registerTask('js', ['jshint', 'lmd:index']);
+    grunt.registerTask('js', ['jshint', 'lmd:index', 'lmd:admin']);
 
     // Release task
     grunt.registerTask('release', ['jshint', 'lmd:index_pack', 'csso']);
