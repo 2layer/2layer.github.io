@@ -5,6 +5,7 @@
     "extends": "./index.lmd.json",
     "modules": {
         "*": "*.js",
+        "*Template": "templates/*.html",
         "*View": "views/*.js"
     },
     "node": true

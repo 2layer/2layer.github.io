@@ -5,7 +5,10 @@
             "type": "Feature",
             "geometry": {
                 "type": "Point",
-                "coordinates": [60.650875169164664, 56.84878426050872]
+                "coordinates": [
+                    60.650875169164664,
+                    56.84878426050872
+                ]
             },
             "properties": {
                 "name": "Lenus",

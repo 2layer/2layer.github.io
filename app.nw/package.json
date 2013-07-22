@@ -19,7 +19,7 @@
     "license": "MIT",
     "main": "index.html",
     "window": {
-        "toolbar": false,
+        "toolbar": true,
         "resizable": true,
         "fullscreen": false,
 

@@ -1,0 +1,48 @@
+.modal {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+
+    width: 600px;
+    height: 370px;
+
+    margin-left: -300px;
+    margin-top: -200px;
+
+    background: #fff;
+    outline: 9999px solid rgba(0,0,0,0.2);
+
+    padding: 20px;
+
+    font-family: 'iflash-705', 'Terminal', monospace;
+    font-size: 12px;
+}
+
+.modal__header {
+    font-size: 32px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+}
+
+.modal__section {
+    display: block;
+    padding: 10px;
+}
+
+.modal__section input {
+    position: absolute;
+    left: 150px;
+    width: 450px;
+    padding: 2px;
+}
+
+.modal__section span {
+    line-height: 20px;
+    height: 20px;
+    display: inline-block;
+}
+
+.modal__buttons {
+    padding: 10px;
+    text-align: right;
+}

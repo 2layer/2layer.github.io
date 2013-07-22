@@ -28,6 +28,8 @@ var online = new Online({
     collection: characters
 });
 
+$('.content').addClass('content_mode_admin');
+
 monsters.fetch();
 characters.fetch();
 

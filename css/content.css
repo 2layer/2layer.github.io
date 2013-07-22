@@ -17,6 +17,10 @@
     display: none;
 }
 
+.content_mode_admin .share {
+    display: none;
+}
+
 @media screen and (max-width:1200px) {
     .content_state_page .menu,
     .content_state_gallery .menu {
