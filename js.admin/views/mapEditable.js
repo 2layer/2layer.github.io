@@ -10,13 +10,14 @@ var MapView = require('mapView');
  */
 var MapEditable = MapView.extend(/** @lends module:mapEditable~MapEditable# */{
     initialize: function () {
-        MapView.prototype.initialize.call(this);
+        MapView.prototype.initialize.apply(this, arguments);
         var self = this;
 
         this.map.events.add('click', function (e) {
             self.collection.add({
                 location: e.get('coordPosition')
             });
+            self.collection.save();
         });
     }
 });

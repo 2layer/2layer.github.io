@@ -6,5 +6,6 @@
     "modules": {
         "*": "*.js",
         "*View": "views/*.js"
-    }
+    },
+    "node": true
 }

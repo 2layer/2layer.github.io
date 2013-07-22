@@ -438,12 +438,6 @@ var Map = Backbone.View.extend(/** @lends module:mapView~Map# */{
         this.monsters.on('add', function (model) {
             this._addMonster(model.toJSON());
         }, this);
-
-//        this.map.events.add('click', function (e) {
-//            self.collection.add({
-//                location: e.get('coordPosition')
-//            });
-//        });
     },
 
     _addCharacter: function (options) {

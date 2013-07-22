@@ -2,6 +2,9 @@
  * @module index
  */
 
+var _ = require('_');
+_.extend(require('abstractCollection').prototype, require('saveableCollection'));
+
 var characters = new (require('charactersCollection'))(),
     monsters = new (require('monstersCollection'))(),
     Backbone = require('backbone');
