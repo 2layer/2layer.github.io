@@ -459,7 +459,12 @@ var Map = Backbone.View.extend(/** @lends module:mapView~Map# */{
         });
 
         this.charactersGeoObjects.add(placemark);
+        this._fitCharactersInViewPort();
     },
+
+    _fitCharactersInViewPort: _.debounce(function () {
+        this.map.setBounds(this.charactersGeoObjects.getBounds());
+    }, 5),
 
     _addMonster: function (options) {
         var image = options.image;

@@ -2,6 +2,7 @@ NODE-WEBKIT=v0.6.2
 
 .PHONY: admin
 admin:
+	@mkdir -p bin
 	@rm -rf bin/2layer-admin.app
 	@echo downloading node-webkit engine…
 	curl -sSO http://s3.amazonaws.com/node-webkit/${NODE-WEBKIT}/node-webkit-${NODE-WEBKIT}-osx-ia32.zip

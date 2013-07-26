@@ -15,7 +15,44 @@
                 "date": "Sun Jul 21 2013 13:20:46 GMT+0600 (YEKT)",
                 "class_id": 10,
                 "photo_small": "http://img-fotki.yandex.ru/get/9502/20204465.23/0_b4c91_bf3a9545_XXL.jpg",
-                "photo_url": "http://fotki.yandex.ru/users/davydov-mikhail/view/740497/?page=0"
+                "photo_url": "http://fotki.yandex.ru/users/davydov-mikhail/view/740497/?page=0",
+                "id": 1
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    60.596897876862045,
+                    56.82978071578891
+                ]
+            },
+            "properties": {
+                "name": "Борис",
+                "date": "Fri Jul 23 2013 20:55:49 GMT+0600 (YEKT)",
+                "class_id": 0,
+                "photo_small": "http://img-fotki.yandex.ru/get/9511/20204465.23/0_b52b9_6ce70f47_XXL.jpg",
+                "photo_url": "http://fotki.yandex.ru/users/davydov-mikhail/view/742073/?page=0",
+                "id": 2
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    60.596999800804596,
+                    56.82965572538255
+                ]
+            },
+            "properties": {
+                "name": "Tankly",
+                "date": "Fri Jul 23 2013 22:26:01 GMT+0600 (YEKT)",
+                "class_id": 6,
+                "photo_small": "http://img-fotki.yandex.ru/get/9507/20204465.23/0_b52b8_667f3af5_XXL.jpg",
+                "photo_url": "http://fotki.yandex.ru/users/davydov-mikhail/view/742072?page=0",
+                "id": 3
             }
         }
     ]
