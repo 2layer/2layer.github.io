@@ -72,6 +72,24 @@
                 "photo_url": "http://fotki.yandex.ru/users/davydov-mikhail/view/745720/?page=0",
                 "id": 4
             }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    60.59081984175253,
+                    56.83565605488042
+                ]
+            },
+            "properties": {
+                "name": "Коша",
+                "date": "Mon Jul 29 2013 20:05:17 GMT+0600 (ALMT)",
+                "class_id": 5,
+                "photo_small": "http://img-fotki.yandex.ru/get/9516/20204465.23/0_b60ff_37adc5cb_XXL.jpg",
+                "photo_url": "http://fotki.yandex.ru/users/davydov-mikhail/view/745727/?page=0",
+                "id": 5
+            }
         }
     ]
 }
