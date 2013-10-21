@@ -90,6 +90,24 @@
                 "photo_url": "http://fotki.yandex.ru/users/davydov-mikhail/view/745727/?page=0",
                 "id": 5
             }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    60.619897669683006,
+                    56.843850279351024
+                ]
+            },
+            "properties": {
+                "name": "Mr. ???",
+                "date": "Mon Oct 21 2013 23:14:13 GMT+0600 (YEKT)",
+                "class_id": 9,
+                "photo_small": "http://img-fotki.yandex.ru/get/9261/20204465.26/0_caeee_2ba963a8_XXL.jpg",
+                "photo_url": "http://fotki.yandex.ru/users/davydov-mikhail/view/831214",
+                "id": 6
+            }
         }
     ]
 }
