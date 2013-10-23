@@ -108,6 +108,24 @@
                 "photo_url": "http://fotki.yandex.ru/users/davydov-mikhail/view/831214",
                 "id": 6
             }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    60.61978769911339,
+                    56.843794422417254
+                ]
+            },
+            "properties": {
+                "name": "Ghost",
+                "date": "Wed Oct 23 2013 23:03:28 GMT+0600 (YEKT)",
+                "class_id": 2,
+                "photo_small": "http://img-fotki.yandex.ru/get/9507/20204465.26/0_cb4f4_602de64f_XXL.jpg",
+                "photo_url": "http://fotki.yandex.ru/users/davydov-mikhail/view/832756",
+                "id": 7
+            }
         }
     ]
 }
