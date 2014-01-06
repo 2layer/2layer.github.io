@@ -27,6 +27,32 @@ module.exports = function(grunt) {
             }
         },
 
+        browser_sync: {
+            dev: {
+                bsFiles: {
+                    src : ['index.css', 'index.js', 'index.html']
+                },
+                options: {
+                    debugInfo: true,
+                    ghostMode: {
+                        clicks: true,
+                        links: true,
+                        forms: true,
+                        scroll: true
+                    },
+                    watchTask: true,
+                    server: {
+                        host : 'localhost',
+                        baseDir: '.'
+                    },
+                    ports: {
+                        min: 8000,
+                        max: 8080
+                    }
+                }
+            }
+        },
+
         csso: {
             index: {
                 options: {
@@ -36,15 +62,6 @@ module.exports = function(grunt) {
                 },
                 files: {
                     './index.css': ['css/**/*.css']
-                }
-            }
-        },
-
-        jsdoc : {
-            dist : {
-                src: ['js/**/*.js', 'js.admin/**/*.js'],
-                options: {
-                    destination: 'doc'
                 }
             }
         },
@@ -61,10 +78,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-csso');
     grunt.loadNpmTasks('grunt-lmd');
-    grunt.loadNpmTasks('grunt-jsdoc');
+    grunt.loadNpmTasks('grunt-browser-sync');
 
     // Default task
-    grunt.registerTask('default', ['js', 'css', 'watch']);
+    grunt.registerTask('default', ['browser_sync', 'watch']);
     grunt.registerTask('css', ['csso']);
     grunt.registerTask('js', ['jshint', 'lmd:index', 'lmd:admin']);
 
