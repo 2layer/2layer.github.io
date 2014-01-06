@@ -5,7 +5,8 @@
 var _ = require('_'),
     Backbone = require('backbone'),
     router = require('router'),
-    lang = require('lang');
+    lang = require('lang'),
+    Disqus = require('disqusView');
 
 /**
  * @class
@@ -78,10 +79,11 @@ var Gallery = Backbone.View.extend(/** @lends module:galleyView~Gallery# */{
         };
 
         this.$el.html(this.template(options));
-        this._initShareButton(options);
+        this._initShareButton();
+        this._initDisqus();
     },
 
-    _initShareButton: function (data) {
+    _initShareButton: function () {
         if (!window.Ya || !Ya.share) {
             return;
         }
@@ -102,7 +104,12 @@ var Gallery = Backbone.View.extend(/** @lends module:galleyView~Gallery# */{
                 }
             });
         });
-        return false;
+    },
+
+    _initDisqus: function () {
+        new Disqus({
+            el: this.$el.find('.disqus')
+        });
     },
 
     /**
@@ -120,8 +127,12 @@ var Gallery = Backbone.View.extend(/** @lends module:galleyView~Gallery# */{
         this.render(this.collection.at(index));
     },
 
+    _pageUrl: function (index) {
+        return 'gallery/' + (index + 1);
+    },
+
     _navigate: function (index) {
-        router.navigate('gallery/' + (index + 1), {trigger: true});
+        router.navigate(this._pageUrl(index), {trigger: true});
     },
 
     /**

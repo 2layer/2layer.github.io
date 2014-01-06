@@ -30,7 +30,11 @@ var config = {
         maxZoom: 23
     },
 
-    newbie_days: 7
+    newbie_days: 7,
+
+    disqus: {
+        shortname: '2layer'
+    }
 };
 
 module.exports = config;

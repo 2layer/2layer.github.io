@@ -2,9 +2,18 @@
  * @module router
  */
 
-var Backbone = require('backbone');
+var Backbone = require('backbone'),
+    _ = require('_');
 
 var AVAILABLE_STATES = ['content_state_map', 'content_state_page', 'content_state_gallery'].join(' ');
+
+var hashBangNavigate = _.bind(Backbone.history.navigate, Backbone.history);
+
+function fullHashBangNavigate(fragment, options) {
+    return hashBangNavigate('!' + fragment, options);
+}
+
+Backbone.history.navigate = fullHashBangNavigate;
 
 /**
  * @class
@@ -12,9 +21,10 @@ var AVAILABLE_STATES = ['content_state_map', 'content_state_page', 'content_stat
  */
 var Router = Backbone.Router.extend(/** @lends module:router~Router# */{
     routes: {
-        '': 'hideAll',
-        'gallery/:id': 'showGallery',
-        ':page': 'showPage'
+        '!': 'hideAll',
+        '!gallery/:id': 'showGallery',
+        '!:page': 'showPage',
+        '*default': 'redirectToFullHashBang'
     },
 
     initialize: function () {
@@ -75,6 +85,20 @@ var Router = Backbone.Router.extend(/** @lends module:router~Router# */{
      */
     hideAll: function () {
         this._activate('map');
+    },
+
+    /**
+     * #page -> #!page redirect required by disqus
+     */
+    redirectToFullHashBang: function () {
+        var hash = Backbone.history.getHash();
+
+        // Already full hashbang
+        if (hash.charAt(0) === '!') {
+            return;
+        }
+
+        this.navigate(hash, {trigger: true});
     },
 
     _activate: function (what) {
