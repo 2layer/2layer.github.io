@@ -2,7 +2,8 @@
  * @module index
  */
 
-var characters = new (require('charactersCollection'))(),
+var lang = require('lang'),
+    characters = new (require('charactersCollection'))(),
     monsters = new (require('monstersCollection'))(),
     Backbone = require('backbone');
 
@@ -23,6 +24,12 @@ var Online = require('onlineView');
 var online = new Online({
     el: '.online',
     collection: characters
+});
+
+var Page = require('pageView');
+var page = new Page({
+    el: '.js-about-page:lang(' + lang + ')',
+    name: 'about'
 });
 
 monsters.fetch();
