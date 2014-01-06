@@ -32,7 +32,6 @@ var Disqus = Backbone.View.extend({
      * @returns {Promise}
      */
     reset: function (options) {
-        console.log(35);
         return disqus(config.shortname).pipe(function (disqus) {
             disqus.reset({
                 reload: true,
