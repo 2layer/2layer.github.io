@@ -27,38 +27,11 @@ module.exports = function(grunt) {
             }
         },
 
-        browser_sync: {
-            dev: {
-                bsFiles: {
-                    src : ['index.css', 'index.js', 'index.html']
-                },
-                options: {
-                    debugInfo: true,
-                    ghostMode: {
-                        clicks: true,
-                        links: true,
-                        forms: true,
-                        scroll: true
-                    },
-                    watchTask: true,
-                    server: {
-                        host : 'localhost',
-                        baseDir: '.'
-                    },
-                    ports: {
-                        min: 8000,
-                        max: 8080
-                    }
-                }
-            }
-        },
-
         csso: {
             index: {
                 options: {
                     report: 'min',
-                    banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-                        '<%= grunt.template.today("yyyy-mm-dd") %> */\n'
+                    banner: '/*! <%= pkg.name %> - v<%= pkg.version %>*/\n'
                 },
                 files: {
                     './index.css': ['css/**/*.css']
@@ -81,9 +54,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-browser-sync');
 
     // Default task
-    grunt.registerTask('default', ['browser_sync', 'watch']);
+    grunt.registerTask('default', ['css', 'js', 'watch']);
     grunt.registerTask('css', ['csso']);
-    grunt.registerTask('js', ['jshint', 'lmd:index', 'lmd:admin']);
+    grunt.registerTask('js', ['jshint', 'lmd:index']);
 
     // Release task
     grunt.registerTask('release', ['jshint', 'lmd:index_pack', 'csso']);
