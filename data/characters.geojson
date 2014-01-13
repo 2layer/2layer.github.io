@@ -144,6 +144,42 @@
                 "photo_url": "http://fotki.yandex.ru/users/davydov-mikhail/view/843129/",
                 "id": 8
             }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    60.61964017761754,
+                    56.84365330979079
+                ]
+            },
+            "properties": {
+                "name": "Yuki",
+                "date": "Tue Jan 14 2014 00:30:40 GMT+0600 (YEKT)",
+                "class_id": 4,
+                "photo_small": "http://img-fotki.yandex.ru/get/9836/20204465.2a/0_de008_32240e58_XXL.jpg",
+                "photo_url": "http://fotki.yandex.ru/users/davydov-mikhail/view/909320/",
+                "id": 9
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    60.61941218985129,
+                    56.84364302030755
+                ]
+            },
+            "properties": {
+                "name": "Безумство",
+                "date": "Tue Jan 14 2014 00:34:05 GMT+0600 (YEKT)",
+                "class_id": 6,
+                "photo_small": "http://img-fotki.yandex.ru/get/9061/20204465.2a/0_de009_e5bf295f_XXL.jpg",
+                "photo_url": "http://fotki.yandex.ru/users/davydov-mikhail/view/909321/?page=0",
+                "id": 10
+            }
         }
     ]
 }
