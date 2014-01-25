@@ -51,6 +51,22 @@
     line-height: 30px;
 }
 
+.gallery__close {
+    color: #222;
+    font-size: 40px;
+    line-height: 60px;
+    position: absolute;
+    right: 50px;
+    top: 10px;
+    text-decoration: none;
+
+    font-family: Helvetica;
+}
+
+.gallery__close:hover {
+    color: #0060a6;
+}
+
 @media screen and (max-width:540px) {
     .gallery {
         padding: 5px 5px 10px 5px;
@@ -58,6 +74,12 @@
 
     .gallery__date {
         font-size: 10px;
+    }
+
+    .gallery__close {
+        right: 10px;
+        top: 10px;
+        line-height: 20px;
     }
 
     .gallery__date {
