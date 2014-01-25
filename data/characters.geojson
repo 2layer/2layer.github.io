@@ -180,6 +180,42 @@
                 "photo_url": "http://fotki.yandex.ru/users/davydov-mikhail/view/909321/?page=0",
                 "id": 10
             }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    60.6192727149825,
+                    56.84376355407586
+                ]
+            },
+            "properties": {
+                "name": "Сергей",
+                "date": "Sun Jan 26 2014 01:04:40 GMT+0600 (YEKT)",
+                "class_id": 3,
+                "photo_small": "http://img-fotki.yandex.ru/get/9834/20204465.2b/0_dfdca_dfe6d9ea_XXL.jpg",
+                "photo_url": "http://fotki.yandex.ru/users/davydov-mikhail/view/916938/?page=0",
+                "id": 11
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    60.61933977020791,
+                    56.84357981341962
+                ]
+            },
+            "properties": {
+                "name": "Shadow",
+                "date": "Sun Jan 26 2014 01:05:10 GMT+0600 (YEKT)",
+                "class_id": 5,
+                "photo_small": "http://img-fotki.yandex.ru/get/9826/20204465.2b/0_dfdc9_e9eea3d0_XXL.jpg",
+                "photo_url": "http://fotki.yandex.ru/users/davydov-mikhail/view/916937/?page=0",
+                "id": 12
+            }
         }
     ]
 }
