@@ -13,7 +13,7 @@
         "grunt-contrib-watch": "*",
         "grunt-contrib-jshint": "*",
         "grunt-lmd": "*",
-        "grunt-browser-sync": "*"
+        "grunt-contrib-coffee": "0.4.x"
     },
     "author": "Mikhail Davydov <i@azproduction.ru>",
     "license": "MIT",
