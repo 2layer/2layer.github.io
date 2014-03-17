@@ -3,15 +3,7 @@
 module.exports = (grunt) ->
   # Project configuration.
   grunt.initConfig
-    jshint:
-      all:
-        options:
-          jshintrc: '.jshintrc'
-        src: [
-          'js/**/*.js',
-          'js.admin/**/*.js',
-          'Gruntfile.js'
-        ]
+    pkg: grunt.file.readJSON 'package.json'
 
     coffee:
       options:
@@ -26,17 +18,16 @@ module.exports = (grunt) ->
         ]
 
     watch:
-      js:
+      lib:
         files: [
-          'js/**/*.js',
-          'js.admin/**/*.js',
-          'js/templates/*.html',
-          'js.admin/templates/*.html'
+          'lib/**/*.js',
+          'lib/templates/*.html',
+          'lib/admin/templates/*.html'
         ]
-        tasks: ['js']
+        tasks: ['scripts']
       css:
         files: ['css/**/*.css']
-        tasks: ['css']
+        tasks: ['styles']
 
     csso:
       index:
@@ -51,17 +42,24 @@ module.exports = (grunt) ->
       index_pack: 'index+pack'
       admin: 'admin'
 
+    clean:
+      coffee:
+       src: ['temp']
+
   # These plugins provide necessary tasks
-  grunt.loadNpmTasks 'grunt-contrib-jshint'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
+  grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-csso'
   grunt.loadNpmTasks 'grunt-lmd'
 
   # Default task
-  grunt.registerTask 'default', ['css', 'js', 'watch']
-  grunt.registerTask 'css', ['csso']
-  grunt.registerTask 'js', ['jshint', 'lmd:index']
+  grunt.registerTask 'default', ['styles', 'scripts', 'watch']
+  grunt.registerTask 'styles', ['csso']
+  grunt.registerTask 'scripts', ['clean', 'coffee', 'lmd:index']
 
   # Release task
-  grunt.registerTask 'release', ['jshint', 'lmd:index_pack', 'csso']
+  grunt.registerTask 'release', ['coffee', 'lmd:index_pack', 'csso']
+
+  # Bin task
+  grunt.registerTask 'bin', ['coffee', 'lmd:index_pack', 'csso']

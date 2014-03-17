@@ -13,7 +13,7 @@ admin:
 	@mkdir bin/2layer-admin.app/Contents/Resources/app.nw/
 
 # Build admin files
-	@grunt css lmd:admin
+	@grunt bin
 
 # Common files
 	@cd bin/2layer-admin.app/Contents/Resources/app.nw/ && ln -s ../../../../../index.html

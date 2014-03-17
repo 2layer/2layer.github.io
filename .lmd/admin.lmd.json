@@ -1,6 +1,6 @@
 {
     "name": "BUILD: admin",
-    "root": "../js.admin",
+    "root": "../temp/admin",
     "output": "../app.nw/index.js",
     "extends": "./index.lmd.json",
     "modules": {

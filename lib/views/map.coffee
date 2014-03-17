@@ -39,7 +39,7 @@ Map = Backbone.View.extend
     @monsters.on 'add', (model) =>
       @_addMonster model.toJSON()
 
-  _addCharacter: ({class_id, name, location}) ->
+  _addCharacter: ({class_id, name, location, id}) ->
     properties =
       hintContent: name
 
@@ -53,15 +53,15 @@ Map = Backbone.View.extend
 
     placemark.events.add 'click', ->
       placemark.hint.hide $.noop, true
-      router.navigate "gallery/#{options.id}", trigger: true
+      router.navigate "gallery/#{id}", trigger: true
       return
 
     @charactersGeoObjects.add placemark
     @_fitCharactersInViewPort()
 
-  _fitCharactersInViewPort: _.debounce ->
+  _fitCharactersInViewPort: _.debounce( ->
     @map.setBounds @charactersGeoObjects.getBounds()
-  , 5,
+  , 5),
 
   _addMonster: ({image}) ->
     options =

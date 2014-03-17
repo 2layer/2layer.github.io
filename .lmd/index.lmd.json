@@ -1,6 +1,6 @@
 {
     "name": "BUILD: main",
-    "root": "../js",
+    "root": "../temp",
     "output": "../index.js",
     "modules": {
         "ymaps": "@ymaps",
@@ -8,14 +8,14 @@
         "*View": "views/*.js",
         "*Model": "models/*.js",
         "*Collection": "collections/*.js",
-        "*Template": "templates/*.html",
+        "*Template": "../lib/templates/*.html",
 
-        "moment": "vendors/moment.min.js",
-        "moment-ru": "vendors/moment-ru.js",
-        "underscore": "vendors/underscore-min.js",
+        "moment": "../lib/vendors/moment.min.js",
+        "moment-ru": "../lib/vendors/moment-ru.js",
+        "underscore": "../lib/vendors/underscore-min.js",
         "_": "@underscore",
-        "backbone": "vendors/backbone-min.js",
-        "disqus": "vendors/disqus-loader.js"
+        "backbone": "../lib/vendors/backbone-min.js",
+        "disqus": "../lib/vendors/disqus-loader.js"
     },
     "main": "bootstrap",
 

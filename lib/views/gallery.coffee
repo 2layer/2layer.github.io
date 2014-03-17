@@ -101,7 +101,9 @@ Gallery = Backbone.View.extend
       router.navigate '', trigger: true
       return
 
-    @render @collection.at index
+    # Check in case of bad index
+    character = @collection.at index
+    @render character if character
 
   _pageUrl: (index) -> "gallery/#{index + 1}"
 
