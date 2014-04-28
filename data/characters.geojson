@@ -216,6 +216,42 @@
                 "photo_url": "http://fotki.yandex.ru/users/davydov-mikhail/view/916937/?page=0",
                 "id": 12
             }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    60.620018369088676,
+                    56.843456339189885
+                ]
+            },
+            "properties": {
+                "name": "Kefir",
+                "date": "Tue Apr 29 2014 01:18:30 GMT+0600 (YEKT)",
+                "class_id": 4,
+                "photo_small": "http://img-fotki.yandex.ru/get/5302/20204465.34/0_f50ca_bc71ae0e_XL.jpg",
+                "photo_url": "http://fotki.yandex.ru/users/davydov-mikhail/view/1003722",
+                "id": 13
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    60.619747465978165,
+                    56.843585693134656
+                ]
+            },
+            "properties": {
+                "name": "Никита",
+                "date": "Tue Apr 29 2014 01:19:33 GMT+0600 (YEKT)",
+                "class_id": 5,
+                "photo_small": "http://img-fotki.yandex.ru/get/5303/20204465.34/0_f50cb_2457_XL.jpg",
+                "photo_url": "http://fotki.yandex.ru/users/davydov-mikhail/view/1003723",
+                "id": 14
+            }
         }
     ]
 }
