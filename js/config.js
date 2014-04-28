@@ -16,7 +16,7 @@ var config = {
 
     charactersCount: 11,
 
-    ymapsApi: 'http://api-maps.yandex.ru/2.0.30/?coordorder=longlat&load=package.standard&lang=%lang',
+    ymapsApi: 'http://api-maps.yandex.ru/2.0.36/?coordorder=longlat&load=package.standard&lang=%lang',
 
     mapState: {
         center: [60.650875169164664, 56.84878426050872],
